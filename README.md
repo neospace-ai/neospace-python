@@ -42,7 +42,7 @@ chat_completion = client.chat.completions.create(
             "content": "Say this is a test",
         }
     ],
-    model="gpt-3.5-turbo",
+    model="7b-r16_lora_full_constrained",
 )
 ```
 
@@ -124,7 +124,7 @@ async def main() -> None:
                 "content": "Say this is a test",
             }
         ],
-        model="gpt-3.5-turbo",
+        model="7b-r16_lora_full_constrained",
     )
 
 
@@ -143,7 +143,7 @@ from neospace import NeoSpace
 client = NeoSpace()
 
 stream = client.chat.completions.create(
-    model="gpt-4",
+    model="7b-r16_lora_full_constrained",
     messages=[{"role": "user", "content": "Say this is a test"}],
     stream=True,
 )
@@ -161,7 +161,7 @@ client = AsyncNeoSpace()
 
 async def main():
     stream = await client.chat.completions.create(
-        model="gpt-4",
+        model="7b-r16_lora_full_constrained",
         messages=[{"role": "user", "content": "Say this is a test"}],
         stream=True,
     )
@@ -190,7 +190,7 @@ neospace.base_url = "https://..."
 neospace.default_headers = {"x-foo": "true"}
 
 completion = neospace.chat.completions.create(
-    model="gpt-4",
+    model="7b-r16_lora_full_constrained",
     messages=[
         {
             "role": "user",
@@ -308,7 +308,7 @@ completion = client.chat.completions.create(
             "content": "Can you generate an example json object describing a fruit?",
         }
     ],
-    model="gpt-3.5-turbo-1106",
+    model="7b-r16_lora_full_constrained-1106",
     response_format={"type": "json_object"},
 )
 ```
@@ -348,7 +348,7 @@ client = NeoSpace()
 
 try:
     client.fine_tuning.jobs.create(
-        model="gpt-3.5-turbo",
+        model="7b-r16_lora_full_constrained",
         training_file="file-abc123",
     )
 except neospace.APIConnectionError as e:
@@ -400,7 +400,7 @@ client.with_options(max_retries=5).chat.completions.create(
             "content": "How can I get the name of the current day in Node.js?",
         }
     ],
-    model="gpt-3.5-turbo",
+    model="7b-r16_lora_full_constrained",
 )
 ```
 
@@ -431,7 +431,7 @@ client.with_options(timeout=5.0).chat.completions.create(
             "content": "How can I list all files in a directory using Python?",
         }
     ],
-    model="gpt-3.5-turbo",
+    model="7b-r16_lora_full_constrained",
 )
 ```
 
@@ -476,7 +476,7 @@ response = client.chat.completions.with_raw_response.create(
         "role": "user",
         "content": "Say this is a test",
     }],
-    model="gpt-3.5-turbo",
+    model="7b-r16_lora_full_constrained",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -509,7 +509,7 @@ with client.chat.completions.with_streaming_response.create(
             "content": "Say this is a test",
         }
     ],
-    model="gpt-3.5-turbo",
+    model="7b-r16_lora_full_constrained",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -606,7 +606,7 @@ client = AzureNeoSpace(
 )
 
 completion = client.chat.completions.create(
-    model="deployment-name",  # e.g. gpt-35-instant
+    model="deployment-name",  # e.g. 7b-r16_lora_full_constrained-instant
     messages=[
         {
             "role": "user",

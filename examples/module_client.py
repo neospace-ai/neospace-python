@@ -9,7 +9,7 @@ neospace.default_headers = {"x-foo": "true"}
 
 # all API calls work in the exact same fashion as well
 stream = neospace.chat.completions.create(
-    model="gpt-4",
+    model="7b-r16_lora_full_constrained",
     messages=[
         {
             "role": "user",

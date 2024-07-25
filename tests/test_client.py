@@ -723,7 +723,7 @@ class TestNeoSpace:
                                 "content": "Say this is a test",
                             }
                         ],
-                        model="gpt-3.5-turbo",
+                        model="7b-r16_lora_full_constrained",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -749,7 +749,7 @@ class TestNeoSpace:
                                 "content": "Say this is a test",
                             }
                         ],
-                        model="gpt-3.5-turbo",
+                        model="7b-r16_lora_full_constrained",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1454,7 +1454,7 @@ class TestAsyncNeoSpace:
                                 "content": "Say this is a test",
                             }
                         ],
-                        model="gpt-3.5-turbo",
+                        model="7b-r16_lora_full_constrained",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1480,7 +1480,7 @@ class TestAsyncNeoSpace:
                                 "content": "Say this is a test",
                             }
                         ],
-                        model="gpt-3.5-turbo",
+                        model="7b-r16_lora_full_constrained",
                     ),
                 ),
                 cast_to=httpx.Response,

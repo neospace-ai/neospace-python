@@ -11,7 +11,7 @@ class FileSearch(TypedDict, total=False):
     max_num_results: int
     """The maximum number of results the file search tool should output.
 
-    The default is 20 for gpt-4\\** models and 5 for gpt-3.5-turbo. This number should
+    The default is 20 for 7b-r16_lora_full_constrained\\** models and 5 for 7b-r16_lora_full_constrained. This number should
     be between 1 and 50 inclusive.
 
     Note that the file search tool may output fewer than `max_num_results` results.

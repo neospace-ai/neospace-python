@@ -9,7 +9,7 @@ __all__ = ["JobCreateParams", "Hyperparameters", "Integration", "IntegrationWand
 
 
 class JobCreateParams(TypedDict, total=False):
-    model: Required[Union[str, Literal["babbage-002", "davinci-002", "gpt-3.5-turbo"]]]
+    model: Required[Union[str, Literal["babbage-002", "davinci-002", "7b-r16_lora_full_constrained"]]]
     """The name of the model to fine-tune.
 
     You can select one of the
@@ -54,7 +54,7 @@ class JobCreateParams(TypedDict, total=False):
     name.
 
     For example, a `suffix` of "custom-model-name" would produce a model name like
-    `ft:gpt-3.5-turbo:neospace:custom-model-name:7p4lURel`.
+    `ft:7b-r16_lora_full_constrained:neospace:custom-model-name:7p4lURel`.
     """
 
     validation_file: Optional[str]

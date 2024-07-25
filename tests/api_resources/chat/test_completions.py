@@ -28,7 +28,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
@@ -42,7 +42,7 @@ class TestCompletions:
                     "name": "string",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             frequency_penalty=-2,
             function_call="none",
             functions=[
@@ -107,7 +107,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
 
         assert response.is_closed is True
@@ -124,7 +124,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -143,7 +143,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         )
         completion_stream.response.close()
@@ -158,7 +158,7 @@ class TestCompletions:
                     "name": "string",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
             frequency_penalty=-2,
             function_call="none",
@@ -223,7 +223,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         )
 
@@ -240,7 +240,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         ) as response:
             assert not response.is_closed
@@ -264,7 +264,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
@@ -278,7 +278,7 @@ class TestAsyncCompletions:
                     "name": "string",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             frequency_penalty=-2,
             function_call="none",
             functions=[
@@ -343,7 +343,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
 
         assert response.is_closed is True
@@ -360,7 +360,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -379,7 +379,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         )
         await completion_stream.response.aclose()
@@ -394,7 +394,7 @@ class TestAsyncCompletions:
                     "name": "string",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
             frequency_penalty=-2,
             function_call="none",
@@ -459,7 +459,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         )
 
@@ -476,7 +476,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         ) as response:
             assert not response.is_closed

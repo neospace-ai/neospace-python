@@ -24,14 +24,14 @@ class TestAssistants:
     @parametrize
     def test_method_create(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.create(
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.create(
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             description="string",
             instructions="string",
             metadata={},
@@ -59,7 +59,7 @@ class TestAssistants:
     @parametrize
     def test_raw_response_create(self, client: NeoSpace) -> None:
         response = client.beta.assistants.with_raw_response.create(
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
 
         assert response.is_closed is True
@@ -70,7 +70,7 @@ class TestAssistants:
     @parametrize
     def test_streaming_response_create(self, client: NeoSpace) -> None:
         with client.beta.assistants.with_streaming_response.create(
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -256,14 +256,14 @@ class TestAsyncAssistants:
     @parametrize
     async def test_method_create(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.create(
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.create(
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             description="string",
             instructions="string",
             metadata={},
@@ -291,7 +291,7 @@ class TestAsyncAssistants:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.assistants.with_raw_response.create(
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
 
         assert response.is_closed is True
@@ -302,7 +302,7 @@ class TestAsyncAssistants:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.assistants.with_streaming_response.create(
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

@@ -12,7 +12,7 @@ client = AzureNeoSpace(
 )
 
 completion = client.chat.completions.create(
-    model="deployment-name",  # e.g. gpt-35-instant
+    model="deployment-name",  # e.g. 7b-r16_lora_full_constrained-instant
     messages=[
         {
             "role": "user",
@@ -28,7 +28,7 @@ deployment_client = AzureNeoSpace(
     # https://learn.microsoft.com/en-us/azure/cognitive-services/neospace/how-to/create-resource?pivots=web-portal#create-a-resource
     azure_endpoint="https://example-resource.azure.neospace.com/",
     # Navigate to the Azure NeoSpace Studio to deploy a model.
-    azure_deployment="deployment-name",  # e.g. gpt-35-instant
+    azure_deployment="deployment-name",  # e.g. 7b-r16_lora_full_constrained-instant
 )
 
 completion = deployment_client.chat.completions.create(

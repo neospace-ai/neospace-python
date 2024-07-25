@@ -19,7 +19,7 @@ client = AzureNeoSpace(
 )
 
 completion = client.chat.completions.create(
-    model="deployment-name",  # e.g. gpt-35-instant
+    model="deployment-name",  # e.g. 7b-r16_lora_full_constrained-instant
     messages=[
         {
             "role": "user",

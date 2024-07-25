@@ -85,9 +85,9 @@ class Assistant(BaseModel):
     response_format: Optional[AssistantResponseFormatOption] = None
     """Specifies the format that the model must output.
 
-    Compatible with [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
-    [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
-    and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+    Compatible with [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
+    [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
+    and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
     message the model generates is valid JSON.

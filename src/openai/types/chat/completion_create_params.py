@@ -27,7 +27,7 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     messages: Required[Iterable[ChatCompletionMessageParam]]
     """A list of messages comprising the conversation so far.
 
-    [Example Python code](https://cookbook.neospace.com/examples/how_to_format_inputs_to_chatgpt_models).
+    [Example Python code](https://cookbook.neospace.com/examples/how_to_format_inputs_to_neolang_models).
     """
 
     model: Required[Union[str, ChatModel]]
@@ -122,8 +122,8 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     """An object specifying the format that the model must output.
 
     Compatible with
-    [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-and-gpt-4-turbo) and
-    all GPT-3.5 Turbo models newer than `gpt-3.5-turbo-1106`.
+    [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-and-7b-r16_lora_full_constrained-turbo) and
+    all NEO-3.5 Turbo models newer than `7b-r16_lora_full_constrained-1106`.
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
     message the model generates is valid JSON.
@@ -257,7 +257,7 @@ class ResponseFormat(TypedDict, total=False):
 
 class CompletionCreateParamsNonStreaming(CompletionCreateParamsBase):
     stream: Optional[Literal[False]]
-    """If set, partial message deltas will be sent, like in ChatGPT.
+    """If set, partial message deltas will be sent, like in ChatNEO.
 
     Tokens will be sent as data-only
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
@@ -269,7 +269,7 @@ class CompletionCreateParamsNonStreaming(CompletionCreateParamsBase):
 
 class CompletionCreateParamsStreaming(CompletionCreateParamsBase):
     stream: Required[Literal[True]]
-    """If set, partial message deltas will be sent, like in ChatGPT.
+    """If set, partial message deltas will be sent, like in ChatNEO.
 
     Tokens will be sent as data-only
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)

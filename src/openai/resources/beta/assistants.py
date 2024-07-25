@@ -49,28 +49,28 @@ class Assistants(SyncAPIResource):
         model: Union[
             str,
             Literal[
-                "gpt-4o",
-                "gpt-4o-2024-05-13",
-                "gpt-4o-mini",
-                "gpt-4o-mini-2024-07-18",
-                "gpt-4-turbo",
-                "gpt-4-turbo-2024-04-09",
-                "gpt-4-0125-preview",
-                "gpt-4-turbo-preview",
-                "gpt-4-1106-preview",
-                "gpt-4-vision-preview",
-                "gpt-4",
-                "gpt-4-0314",
-                "gpt-4-0613",
-                "gpt-4-32k",
-                "gpt-4-32k-0314",
-                "gpt-4-32k-0613",
-                "gpt-3.5-turbo",
-                "gpt-3.5-turbo-16k",
-                "gpt-3.5-turbo-0613",
-                "gpt-3.5-turbo-1106",
-                "gpt-3.5-turbo-0125",
-                "gpt-3.5-turbo-16k-0613",
+                "7b-r16_lora_full_constrainedo",
+                "7b-r16_lora_full_constrainedo-2024-05-13",
+                "7b-r16_lora_full_constrainedo-mini",
+                "7b-r16_lora_full_constrainedo-mini-2024-07-18",
+                "7b-r16_lora_full_constrained-turbo",
+                "7b-r16_lora_full_constrained-turbo-2024-04-09",
+                "7b-r16_lora_full_constrained-0125-preview",
+                "7b-r16_lora_full_constrained-turbo-preview",
+                "7b-r16_lora_full_constrained-1106-preview",
+                "7b-r16_lora_full_constrained-vision-preview",
+                "7b-r16_lora_full_constrained",
+                "7b-r16_lora_full_constrained-0314",
+                "7b-r16_lora_full_constrained-0613",
+                "7b-r16_lora_full_constrained-32k",
+                "7b-r16_lora_full_constrained-32k-0314",
+                "7b-r16_lora_full_constrained-32k-0613",
+                "7b-r16_lora_full_constrained",
+                "7b-r16_lora_full_constrained-16k",
+                "7b-r16_lora_full_constrained-0613",
+                "7b-r16_lora_full_constrained-1106",
+                "7b-r16_lora_full_constrained-0125",
+                "7b-r16_lora_full_constrained-16k-0613",
             ],
         ],
         description: Optional[str] | NotGiven = NOT_GIVEN,
@@ -112,9 +112,9 @@ class Assistants(SyncAPIResource):
           name: The name of the assistant. The maximum length is 256 characters.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
-              and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+              [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
+              [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
+              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.
@@ -257,9 +257,9 @@ class Assistants(SyncAPIResource):
           name: The name of the assistant. The maximum length is 256 characters.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
-              and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+              [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
+              [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
+              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.
@@ -440,28 +440,28 @@ class AsyncAssistants(AsyncAPIResource):
         model: Union[
             str,
             Literal[
-                "gpt-4o",
-                "gpt-4o-2024-05-13",
-                "gpt-4o-mini",
-                "gpt-4o-mini-2024-07-18",
-                "gpt-4-turbo",
-                "gpt-4-turbo-2024-04-09",
-                "gpt-4-0125-preview",
-                "gpt-4-turbo-preview",
-                "gpt-4-1106-preview",
-                "gpt-4-vision-preview",
-                "gpt-4",
-                "gpt-4-0314",
-                "gpt-4-0613",
-                "gpt-4-32k",
-                "gpt-4-32k-0314",
-                "gpt-4-32k-0613",
-                "gpt-3.5-turbo",
-                "gpt-3.5-turbo-16k",
-                "gpt-3.5-turbo-0613",
-                "gpt-3.5-turbo-1106",
-                "gpt-3.5-turbo-0125",
-                "gpt-3.5-turbo-16k-0613",
+                "7b-r16_lora_full_constrainedo",
+                "7b-r16_lora_full_constrainedo-2024-05-13",
+                "7b-r16_lora_full_constrainedo-mini",
+                "7b-r16_lora_full_constrainedo-mini-2024-07-18",
+                "7b-r16_lora_full_constrained-turbo",
+                "7b-r16_lora_full_constrained-turbo-2024-04-09",
+                "7b-r16_lora_full_constrained-0125-preview",
+                "7b-r16_lora_full_constrained-turbo-preview",
+                "7b-r16_lora_full_constrained-1106-preview",
+                "7b-r16_lora_full_constrained-vision-preview",
+                "7b-r16_lora_full_constrained",
+                "7b-r16_lora_full_constrained-0314",
+                "7b-r16_lora_full_constrained-0613",
+                "7b-r16_lora_full_constrained-32k",
+                "7b-r16_lora_full_constrained-32k-0314",
+                "7b-r16_lora_full_constrained-32k-0613",
+                "7b-r16_lora_full_constrained",
+                "7b-r16_lora_full_constrained-16k",
+                "7b-r16_lora_full_constrained-0613",
+                "7b-r16_lora_full_constrained-1106",
+                "7b-r16_lora_full_constrained-0125",
+                "7b-r16_lora_full_constrained-16k-0613",
             ],
         ],
         description: Optional[str] | NotGiven = NOT_GIVEN,
@@ -503,9 +503,9 @@ class AsyncAssistants(AsyncAPIResource):
           name: The name of the assistant. The maximum length is 256 characters.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
-              and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+              [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
+              [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
+              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.
@@ -648,9 +648,9 @@ class AsyncAssistants(AsyncAPIResource):
           name: The name of the assistant. The maximum length is 256 characters.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
-              and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+              [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
+              [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
+              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.

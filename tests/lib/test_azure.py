@@ -75,7 +75,7 @@ def test_client_copying_override_options(client: Client) -> None:
 @pytest.mark.respx()
 def test_client_token_provider_refresh_sync(respx_mock: MockRouter) -> None:
     respx_mock.post(
-        "https://example-resource.azure.neospace.com/neospace/deployments/gpt-4/chat/completions?api-version=2024-02-01"
+        "https://example-resource.azure.neospace.com/neospace/deployments/7b-r16_lora_full_constrained/chat/completions?api-version=2024-02-01"
     ).mock(
         side_effect=[
             httpx.Response(500, json={"error": "server error"}),
@@ -100,7 +100,7 @@ def test_client_token_provider_refresh_sync(respx_mock: MockRouter) -> None:
         azure_ad_token_provider=token_provider,
         azure_endpoint="https://example-resource.azure.neospace.com",
     )
-    client.chat.completions.create(messages=[], model="gpt-4")
+    client.chat.completions.create(messages=[], model="7b-r16_lora_full_constrained")
 
     calls = cast("list[MockRequestCall]", respx_mock.calls)
 
@@ -114,7 +114,7 @@ def test_client_token_provider_refresh_sync(respx_mock: MockRouter) -> None:
 @pytest.mark.respx()
 async def test_client_token_provider_refresh_async(respx_mock: MockRouter) -> None:
     respx_mock.post(
-        "https://example-resource.azure.neospace.com/neospace/deployments/gpt-4/chat/completions?api-version=2024-02-01"
+        "https://example-resource.azure.neospace.com/neospace/deployments/7b-r16_lora_full_constrained/chat/completions?api-version=2024-02-01"
     ).mock(
         side_effect=[
             httpx.Response(500, json={"error": "server error"}),
@@ -140,7 +140,7 @@ async def test_client_token_provider_refresh_async(respx_mock: MockRouter) -> No
         azure_endpoint="https://example-resource.azure.neospace.com",
     )
 
-    await client.chat.completions.create(messages=[], model="gpt-4")
+    await client.chat.completions.create(messages=[], model="7b-r16_lora_full_constrained")
 
     calls = cast("list[MockRequestCall]", respx_mock.calls)
 
