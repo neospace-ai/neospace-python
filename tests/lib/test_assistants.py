@@ -39,7 +39,9 @@ def assert_signatures_in_sync(
 
 
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-def test_create_and_run_poll_method_definition_in_sync(sync: bool, client: NeoSpace, async_client: AsyncNeoSpace) -> None:
+def test_create_and_run_poll_method_definition_in_sync(
+    sync: bool, client: NeoSpace, async_client: AsyncNeoSpace
+) -> None:
     checking_client: NeoSpace | AsyncNeoSpace = client if sync else async_client
 
     assert_signatures_in_sync(
@@ -50,7 +52,9 @@ def test_create_and_run_poll_method_definition_in_sync(sync: bool, client: NeoSp
 
 
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
-def test_create_and_run_stream_method_definition_in_sync(sync: bool, client: NeoSpace, async_client: AsyncNeoSpace) -> None:
+def test_create_and_run_stream_method_definition_in_sync(
+    sync: bool, client: NeoSpace, async_client: AsyncNeoSpace
+) -> None:
     checking_client: NeoSpace | AsyncNeoSpace = client if sync else async_client
 
     assert_signatures_in_sync(

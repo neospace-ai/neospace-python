@@ -1,11 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 
-
 from ..._models import BaseModel
 
-__all__ = ["Translation"]
+__all__ = ["Transcription"]
 
 
-class Translation(BaseModel):
+class Transcription(BaseModel):
     text: str
+    """The transcribed text."""
