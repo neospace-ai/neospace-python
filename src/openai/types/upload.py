@@ -31,7 +31,7 @@ class Upload(BaseModel):
     purpose: str
     """The intended purpose of the file.
 
-    [Please refer here](https://platform.openai.com/docs/api-reference/files/object#files/object-purpose)
+    [Please refer here](https://platform.neospace.com/docs/api-reference/files/object#files/object-purpose)
     for acceptable values.
     """
 

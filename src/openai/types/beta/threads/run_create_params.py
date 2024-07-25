@@ -27,7 +27,7 @@ class RunCreateParamsBase(TypedDict, total=False):
     assistant_id: Required[str]
     """
     The ID of the
-    [assistant](https://platform.openai.com/docs/api-reference/assistants) to use to
+    [assistant](https://platform.neospace.com/docs/api-reference/assistants) to use to
     execute this run.
     """
 
@@ -44,7 +44,7 @@ class RunCreateParamsBase(TypedDict, total=False):
     instructions: Optional[str]
     """
     Overrides the
-    [instructions](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
+    [instructions](https://platform.neospace.com/docs/api-reference/assistants/createAssistant)
     of the assistant. This is useful for modifying the behavior on a per-run basis.
     """
 
@@ -103,7 +103,7 @@ class RunCreateParamsBase(TypedDict, total=False):
         None,
     ]
     """
-    The ID of the [Model](https://platform.openai.com/docs/api-reference/models) to
+    The ID of the [Model](https://platform.neospace.com/docs/api-reference/models) to
     be used to execute this run. If a value is provided here, it will override the
     model associated with the assistant. If not, the model associated with the
     assistant will be used.
@@ -112,15 +112,15 @@ class RunCreateParamsBase(TypedDict, total=False):
     parallel_tool_calls: bool
     """
     Whether to enable
-    [parallel function calling](https://platform.openai.com/docs/guides/function-calling/parallel-function-calling)
+    [parallel function calling](https://platform.neospace.com/docs/guides/function-calling/parallel-function-calling)
     during tool use.
     """
 
     response_format: Optional[AssistantResponseFormatOptionParam]
     """Specifies the format that the model must output.
 
-    Compatible with [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-    [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+    Compatible with [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+    [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
     and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the

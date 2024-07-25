@@ -22,11 +22,11 @@ __all__ = [
 ]
 
 
-class OpenAIError(Exception):
+class NeoSpaceError(Exception):
     pass
 
 
-class APIError(OpenAIError):
+class APIError(NeoSpaceError):
     message: str
     request: httpx.Request
 

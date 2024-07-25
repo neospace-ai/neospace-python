@@ -17,9 +17,9 @@ class FileCreateParams(TypedDict, total=False):
     """The intended purpose of the uploaded file.
 
     Use "assistants" for
-    [Assistants](https://platform.openai.com/docs/api-reference/assistants) and
-    [Message](https://platform.openai.com/docs/api-reference/messages) files,
+    [Assistants](https://platform.neospace.com/docs/api-reference/assistants) and
+    [Message](https://platform.neospace.com/docs/api-reference/messages) files,
     "vision" for Assistants image file inputs, "batch" for
-    [Batch API](https://platform.openai.com/docs/guides/batch), and "fine-tune" for
-    [Fine-tuning](https://platform.openai.com/docs/api-reference/fine-tuning).
+    [Batch API](https://platform.neospace.com/docs/guides/batch), and "fine-tune" for
+    [Fine-tuning](https://platform.neospace.com/docs/api-reference/fine-tuning).
     """

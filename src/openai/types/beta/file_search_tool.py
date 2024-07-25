@@ -17,7 +17,7 @@ class FileSearch(BaseModel):
 
     Note that the file search tool may output fewer than `max_num_results` results.
     See the
-    [file search tool documentation](https://platform.openai.com/docs/assistants/tools/file-search/number-of-chunks-returned)
+    [file search tool documentation](https://platform.neospace.com/docs/assistants/tools/file-search/number-of-chunks-returned)
     for more information.
     """
 

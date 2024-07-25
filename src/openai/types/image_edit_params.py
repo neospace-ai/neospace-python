@@ -55,7 +55,7 @@ class ImageEditParams(TypedDict, total=False):
 
     user: str
     """
-    A unique identifier representing your end-user, which can help OpenAI to monitor
+    A unique identifier representing your end-user, which can help NeoSpace to monitor
     and detect abuse.
-    [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+    [Learn more](https://platform.neospace.com/docs/guides/safety-best-practices/end-user-ids).
     """

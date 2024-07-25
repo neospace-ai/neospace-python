@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
-from openai import OpenAI, AsyncOpenAI
+from neospace import NeoSpace, AsyncNeoSpace
 from tests.utils import assert_matches_type
-from openai.pagination import SyncCursorPage, AsyncCursorPage
-from openai.types.beta.threads.runs import RunStep
+from neospace.pagination import SyncCursorPage, AsyncCursorPage
+from neospace.types.beta.threads.runs import RunStep
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestSteps:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_retrieve(self, client: OpenAI) -> None:
+    def test_method_retrieve(self, client: NeoSpace) -> None:
         step = client.beta.threads.runs.steps.retrieve(
             "string",
             thread_id="string",
@@ -28,7 +28,7 @@ class TestSteps:
         assert_matches_type(RunStep, step, path=["response"])
 
     @parametrize
-    def test_raw_response_retrieve(self, client: OpenAI) -> None:
+    def test_raw_response_retrieve(self, client: NeoSpace) -> None:
         response = client.beta.threads.runs.steps.with_raw_response.retrieve(
             "string",
             thread_id="string",
@@ -41,7 +41,7 @@ class TestSteps:
         assert_matches_type(RunStep, step, path=["response"])
 
     @parametrize
-    def test_streaming_response_retrieve(self, client: OpenAI) -> None:
+    def test_streaming_response_retrieve(self, client: NeoSpace) -> None:
         with client.beta.threads.runs.steps.with_streaming_response.retrieve(
             "string",
             thread_id="string",
@@ -56,7 +56,7 @@ class TestSteps:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: OpenAI) -> None:
+    def test_path_params_retrieve(self, client: NeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             client.beta.threads.runs.steps.with_raw_response.retrieve(
                 "string",
@@ -79,7 +79,7 @@ class TestSteps:
             )
 
     @parametrize
-    def test_method_list(self, client: OpenAI) -> None:
+    def test_method_list(self, client: NeoSpace) -> None:
         step = client.beta.threads.runs.steps.list(
             "string",
             thread_id="string",
@@ -87,7 +87,7 @@ class TestSteps:
         assert_matches_type(SyncCursorPage[RunStep], step, path=["response"])
 
     @parametrize
-    def test_method_list_with_all_params(self, client: OpenAI) -> None:
+    def test_method_list_with_all_params(self, client: NeoSpace) -> None:
         step = client.beta.threads.runs.steps.list(
             "string",
             thread_id="string",
@@ -99,7 +99,7 @@ class TestSteps:
         assert_matches_type(SyncCursorPage[RunStep], step, path=["response"])
 
     @parametrize
-    def test_raw_response_list(self, client: OpenAI) -> None:
+    def test_raw_response_list(self, client: NeoSpace) -> None:
         response = client.beta.threads.runs.steps.with_raw_response.list(
             "string",
             thread_id="string",
@@ -111,7 +111,7 @@ class TestSteps:
         assert_matches_type(SyncCursorPage[RunStep], step, path=["response"])
 
     @parametrize
-    def test_streaming_response_list(self, client: OpenAI) -> None:
+    def test_streaming_response_list(self, client: NeoSpace) -> None:
         with client.beta.threads.runs.steps.with_streaming_response.list(
             "string",
             thread_id="string",
@@ -125,7 +125,7 @@ class TestSteps:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_list(self, client: OpenAI) -> None:
+    def test_path_params_list(self, client: NeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             client.beta.threads.runs.steps.with_raw_response.list(
                 "string",
@@ -143,7 +143,7 @@ class TestAsyncSteps:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_retrieve(self, async_client: AsyncNeoSpace) -> None:
         step = await async_client.beta.threads.runs.steps.retrieve(
             "string",
             thread_id="string",
@@ -152,7 +152,7 @@ class TestAsyncSteps:
         assert_matches_type(RunStep, step, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.threads.runs.steps.with_raw_response.retrieve(
             "string",
             thread_id="string",
@@ -165,7 +165,7 @@ class TestAsyncSteps:
         assert_matches_type(RunStep, step, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.threads.runs.steps.with_streaming_response.retrieve(
             "string",
             thread_id="string",
@@ -180,7 +180,7 @@ class TestAsyncSteps:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncNeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             await async_client.beta.threads.runs.steps.with_raw_response.retrieve(
                 "string",
@@ -203,7 +203,7 @@ class TestAsyncSteps:
             )
 
     @parametrize
-    async def test_method_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_list(self, async_client: AsyncNeoSpace) -> None:
         step = await async_client.beta.threads.runs.steps.list(
             "string",
             thread_id="string",
@@ -211,7 +211,7 @@ class TestAsyncSteps:
         assert_matches_type(AsyncCursorPage[RunStep], step, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncNeoSpace) -> None:
         step = await async_client.beta.threads.runs.steps.list(
             "string",
             thread_id="string",
@@ -223,7 +223,7 @@ class TestAsyncSteps:
         assert_matches_type(AsyncCursorPage[RunStep], step, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_list(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.threads.runs.steps.with_raw_response.list(
             "string",
             thread_id="string",
@@ -235,7 +235,7 @@ class TestAsyncSteps:
         assert_matches_type(AsyncCursorPage[RunStep], step, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.threads.runs.steps.with_streaming_response.list(
             "string",
             thread_id="string",
@@ -249,7 +249,7 @@ class TestAsyncSteps:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_path_params_list(self, async_client: AsyncNeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             await async_client.beta.threads.runs.steps.with_raw_response.list(
                 "string",

@@ -1,14 +1,14 @@
-from openai import AzureOpenAI
+from neospace import AzureNeoSpace
 
 # may change in the future
-# https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#rest-api-versioning
+# https://learn.microsoft.com/en-us/azure/ai-services/neospace/reference#rest-api-versioning
 api_version = "2023-07-01-preview"
 
-# gets the API Key from environment variable AZURE_OPENAI_API_KEY
-client = AzureOpenAI(
+# gets the API Key from environment variable AZURE_NEOSPACE_API_KEY
+client = AzureNeoSpace(
     api_version=api_version,
-    # https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal#create-a-resource
-    azure_endpoint="https://example-endpoint.openai.azure.com",
+    # https://learn.microsoft.com/en-us/azure/cognitive-services/neospace/how-to/create-resource?pivots=web-portal#create-a-resource
+    azure_endpoint="https://example-endpoint.neospace.azure.com",
 )
 
 completion = client.chat.completions.create(
@@ -23,11 +23,11 @@ completion = client.chat.completions.create(
 print(completion.to_json())
 
 
-deployment_client = AzureOpenAI(
+deployment_client = AzureNeoSpace(
     api_version=api_version,
-    # https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal#create-a-resource
-    azure_endpoint="https://example-resource.azure.openai.com/",
-    # Navigate to the Azure OpenAI Studio to deploy a model.
+    # https://learn.microsoft.com/en-us/azure/cognitive-services/neospace/how-to/create-resource?pivots=web-portal#create-a-resource
+    azure_endpoint="https://example-resource.azure.neospace.com/",
+    # Navigate to the Azure NeoSpace Studio to deploy a model.
     azure_deployment="deployment-name",  # e.g. gpt-35-instant
 )
 

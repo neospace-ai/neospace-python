@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from openai import OpenAI, AsyncOpenAI
+from neospace import NeoSpace, AsyncNeoSpace
 from tests.utils import assert_matches_type
-from openai.types.audio import Translation
+from neospace.types.audio import Translation
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -18,7 +18,7 @@ class TestTranslations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_create(self, client: OpenAI) -> None:
+    def test_method_create(self, client: NeoSpace) -> None:
         translation = client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
@@ -26,7 +26,7 @@ class TestTranslations:
         assert_matches_type(Translation, translation, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params(self, client: OpenAI) -> None:
+    def test_method_create_with_all_params(self, client: NeoSpace) -> None:
         translation = client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
@@ -37,7 +37,7 @@ class TestTranslations:
         assert_matches_type(Translation, translation, path=["response"])
 
     @parametrize
-    def test_raw_response_create(self, client: OpenAI) -> None:
+    def test_raw_response_create(self, client: NeoSpace) -> None:
         response = client.audio.translations.with_raw_response.create(
             file=b"raw file contents",
             model="whisper-1",
@@ -49,7 +49,7 @@ class TestTranslations:
         assert_matches_type(Translation, translation, path=["response"])
 
     @parametrize
-    def test_streaming_response_create(self, client: OpenAI) -> None:
+    def test_streaming_response_create(self, client: NeoSpace) -> None:
         with client.audio.translations.with_streaming_response.create(
             file=b"raw file contents",
             model="whisper-1",
@@ -67,7 +67,7 @@ class TestAsyncTranslations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_create(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create(self, async_client: AsyncNeoSpace) -> None:
         translation = await async_client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
@@ -75,7 +75,7 @@ class TestAsyncTranslations:
         assert_matches_type(Translation, translation, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create_with_all_params(self, async_client: AsyncNeoSpace) -> None:
         translation = await async_client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
@@ -86,7 +86,7 @@ class TestAsyncTranslations:
         assert_matches_type(Translation, translation, path=["response"])
 
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_create(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.audio.translations.with_raw_response.create(
             file=b"raw file contents",
             model="whisper-1",
@@ -98,7 +98,7 @@ class TestAsyncTranslations:
         assert_matches_type(Translation, translation, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.audio.translations.with_streaming_response.create(
             file=b"raw file contents",
             model="whisper-1",

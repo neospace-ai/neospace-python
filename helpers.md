@@ -1,13 +1,13 @@
 # Streaming Helpers
 
-OpenAI supports streaming responses when interacting with the [Assistant](#assistant-streaming-api) APIs.
+NeoSpace supports streaming responses when interacting with the [Assistant](#assistant-streaming-api) APIs.
 
 ## Assistant Streaming API
 
-OpenAI supports streaming responses from Assistants. The SDK provides convenience wrappers around the API
+NeoSpace supports streaming responses from Assistants. The SDK provides convenience wrappers around the API
 so you can subscribe to the types of events you are interested in as well as receive accumulated responses.
 
-More information can be found in the documentation: [Assistant Streaming](https://platform.openai.com/docs/assistants/overview?lang=python)
+More information can be found in the documentation: [Assistant Streaming](https://platform.neospace.com/docs/assistants/overview?lang=python)
 
 #### An example of creating a run and subscribing to some events
 
@@ -15,11 +15,11 @@ You can subscribe to events by creating an event handler class and overloading t
 
 ```python
 from typing_extensions import override
-from openai import AssistantEventHandler, OpenAI
-from openai.types.beta.threads import Text, TextDelta
-from openai.types.beta.threads.runs import ToolCall, ToolCallDelta
+from neospace import AssistantEventHandler, NeoSpace
+from neospace.types.beta.threads import Text, TextDelta
+from neospace.types.beta.threads.runs import ToolCall, ToolCallDelta
 
-client = openai.OpenAI()
+client = neospace.NeoSpace()
 
 # First, we create a EventHandler class to define
 # how we want to handle the events in the response stream.
@@ -119,10 +119,10 @@ The assistant API provides events you can subscribe to for the following events.
 def on_event(self, event: AssistantStreamEvent)
 ```
 
-This allows you to subscribe to all the possible raw events sent by the OpenAI streaming API.
+This allows you to subscribe to all the possible raw events sent by the NeoSpace streaming API.
 In many cases it will be more convenient to subscribe to a more specific set of events for your use case.
 
-More information on the types of events can be found here: [Events](https://platform.openai.com/docs/api-reference/assistants-streaming/events)
+More information on the types of events can be found here: [Events](https://platform.neospace.com/docs/api-reference/assistants-streaming/events)
 
 ```python
 def on_run_step_created(self, run_step: RunStep)
@@ -132,7 +132,7 @@ def on_run_step_done(self, run_step: RunStep)
 
 These events allow you to subscribe to the creation, delta and completion of a RunStep.
 
-For more information on how Runs and RunSteps work see the documentation [Runs and RunSteps](https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps)
+For more information on how Runs and RunSteps work see the documentation [Runs and RunSteps](https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps)
 
 ```python
 def on_message_created(self, message: Message)
@@ -145,7 +145,7 @@ different types of content that can be sent from a model (and events are availab
 For convenience, the delta event includes both the incremental update and an accumulated snapshot of the content.
 
 More information on messages can be found
-on in the documentation page [Message](https://platform.openai.com/docs/api-reference/messages/object).
+on in the documentation page [Message](https://platform.neospace.com/docs/api-reference/messages/object).
 
 ```python
 def on_text_created(self, text: Text)
@@ -170,7 +170,7 @@ def on_tool_call_done(self, tool_call: ToolCall)
 
 These events allow you to subscribe to events for the creation, delta and completion of a ToolCall.
 
-More information on tools can be found here [Tools](https://platform.openai.com/docs/assistants/tools)
+More information on tools can be found here [Tools](https://platform.neospace.com/docs/assistants/tools)
 
 ```python
 def on_end(self)

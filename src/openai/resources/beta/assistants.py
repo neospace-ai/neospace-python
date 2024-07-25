@@ -94,9 +94,9 @@ class Assistants(SyncAPIResource):
 
         Args:
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://platform.neospace.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models/overview) for
+              [Model overview](https://platform.neospace.com/docs/models/overview) for
               descriptions of them.
 
           description: The description of the assistant. The maximum length is 512 characters.
@@ -112,8 +112,8 @@ class Assistants(SyncAPIResource):
           name: The name of the assistant. The maximum length is 256 characters.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -154,7 +154,7 @@ class Assistants(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             "/assistants",
             body=maybe_transform(
@@ -203,7 +203,7 @@ class Assistants(SyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get(
             f"/assistants/{assistant_id}",
             options=make_request_options(
@@ -249,16 +249,16 @@ class Assistants(SyncAPIResource):
               characters long.
 
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://platform.neospace.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models/overview) for
+              [Model overview](https://platform.neospace.com/docs/models/overview) for
               descriptions of them.
 
           name: The name of the assistant. The maximum length is 256 characters.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -301,7 +301,7 @@ class Assistants(SyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/assistants/{assistant_id}",
             body=maybe_transform(
@@ -368,7 +368,7 @@ class Assistants(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             "/assistants",
             page=SyncCursorPage[Assistant],
@@ -415,7 +415,7 @@ class Assistants(SyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._delete(
             f"/assistants/{assistant_id}",
             options=make_request_options(
@@ -485,9 +485,9 @@ class AsyncAssistants(AsyncAPIResource):
 
         Args:
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://platform.neospace.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models/overview) for
+              [Model overview](https://platform.neospace.com/docs/models/overview) for
               descriptions of them.
 
           description: The description of the assistant. The maximum length is 512 characters.
@@ -503,8 +503,8 @@ class AsyncAssistants(AsyncAPIResource):
           name: The name of the assistant. The maximum length is 256 characters.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -545,7 +545,7 @@ class AsyncAssistants(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             "/assistants",
             body=await async_maybe_transform(
@@ -594,7 +594,7 @@ class AsyncAssistants(AsyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._get(
             f"/assistants/{assistant_id}",
             options=make_request_options(
@@ -640,16 +640,16 @@ class AsyncAssistants(AsyncAPIResource):
               characters long.
 
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://platform.neospace.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models/overview) for
+              [Model overview](https://platform.neospace.com/docs/models/overview) for
               descriptions of them.
 
           name: The name of the assistant. The maximum length is 256 characters.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -692,7 +692,7 @@ class AsyncAssistants(AsyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/assistants/{assistant_id}",
             body=await async_maybe_transform(
@@ -759,7 +759,7 @@ class AsyncAssistants(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             "/assistants",
             page=AsyncCursorPage[Assistant],
@@ -806,7 +806,7 @@ class AsyncAssistants(AsyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._delete(
             f"/assistants/{assistant_id}",
             options=make_request_options(

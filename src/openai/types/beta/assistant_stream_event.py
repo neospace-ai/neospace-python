@@ -46,7 +46,7 @@ class ThreadCreated(BaseModel):
     data: Thread
     """
     Represents a thread that contains
-    [messages](https://platform.openai.com/docs/api-reference/messages).
+    [messages](https://platform.neospace.com/docs/api-reference/messages).
     """
 
     event: Literal["thread.created"]
@@ -56,7 +56,7 @@ class ThreadRunCreated(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.created"]
@@ -66,7 +66,7 @@ class ThreadRunQueued(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.queued"]
@@ -76,7 +76,7 @@ class ThreadRunInProgress(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.in_progress"]
@@ -86,7 +86,7 @@ class ThreadRunRequiresAction(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.requires_action"]
@@ -96,7 +96,7 @@ class ThreadRunCompleted(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.completed"]
@@ -106,7 +106,7 @@ class ThreadRunIncomplete(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.incomplete"]
@@ -116,7 +116,7 @@ class ThreadRunFailed(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.failed"]
@@ -126,7 +126,7 @@ class ThreadRunCancelling(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.cancelling"]
@@ -136,7 +136,7 @@ class ThreadRunCancelled(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.cancelled"]
@@ -146,7 +146,7 @@ class ThreadRunExpired(BaseModel):
     data: Run
     """
     Represents an execution run on a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.run.expired"]
@@ -208,7 +208,7 @@ class ThreadMessageCreated(BaseModel):
     data: Message
     """
     Represents a message within a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.message.created"]
@@ -218,7 +218,7 @@ class ThreadMessageInProgress(BaseModel):
     data: Message
     """
     Represents a message within a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.message.in_progress"]
@@ -238,7 +238,7 @@ class ThreadMessageCompleted(BaseModel):
     data: Message
     """
     Represents a message within a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.message.completed"]
@@ -248,7 +248,7 @@ class ThreadMessageIncomplete(BaseModel):
     data: Message
     """
     Represents a message within a
-    [thread](https://platform.openai.com/docs/api-reference/threads).
+    [thread](https://platform.neospace.com/docs/api-reference/threads).
     """
 
     event: Literal["thread.message.incomplete"]

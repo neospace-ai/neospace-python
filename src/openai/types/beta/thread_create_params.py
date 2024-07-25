@@ -28,7 +28,7 @@ __all__ = [
 class ThreadCreateParams(TypedDict, total=False):
     messages: Iterable[Message]
     """
-    A list of [messages](https://platform.openai.com/docs/api-reference/messages) to
+    A list of [messages](https://platform.neospace.com/docs/api-reference/messages) to
     start the thread with.
     """
 
@@ -93,7 +93,7 @@ class Message(TypedDict, total=False):
 class ToolResourcesCodeInterpreter(TypedDict, total=False):
     file_ids: List[str]
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs made
+    A list of [file](https://platform.neospace.com/docs/api-reference/files) IDs made
     available to the `code_interpreter` tool. There can be a maximum of 20 files
     associated with the tool.
     """
@@ -140,7 +140,7 @@ class ToolResourcesFileSearchVectorStore(TypedDict, total=False):
 
     file_ids: List[str]
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs to
+    A list of [file](https://platform.neospace.com/docs/api-reference/files) IDs to
     add to the vector store. There can be a maximum of 10000 files in a vector
     store.
     """
@@ -158,7 +158,7 @@ class ToolResourcesFileSearch(TypedDict, total=False):
     vector_store_ids: List[str]
     """
     The
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://platform.neospace.com/docs/api-reference/vector-stores/object)
     attached to this thread. There can be a maximum of 1 vector store attached to
     the thread.
     """
@@ -166,7 +166,7 @@ class ToolResourcesFileSearch(TypedDict, total=False):
     vector_stores: Iterable[ToolResourcesFileSearchVectorStore]
     """
     A helper to create a
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://platform.neospace.com/docs/api-reference/vector-stores/object)
     with file_ids and attach it to this thread. There can be a maximum of 1 vector
     store attached to the thread.
     """

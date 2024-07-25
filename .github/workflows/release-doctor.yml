@@ -10,7 +10,7 @@ jobs:
     name: release doctor
     runs-on: ubuntu-latest
     environment: publish
-    if: github.repository == 'openai/openai-python' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || startsWith(github.head_ref, 'release-please') || github.head_ref == 'next')
+    if: github.repository == 'neospace/neospace-python' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || startsWith(github.head_ref, 'release-please') || github.head_ref == 'next')
 
     steps:
       - uses: actions/checkout@v4
@@ -20,4 +20,4 @@ jobs:
           bash ./bin/check-release-environment
         env:
           STAINLESS_API_KEY: ${{ secrets.STAINLESS_API_KEY }}
-          PYPI_TOKEN: ${{ secrets.OPENAI_PYPI_TOKEN || secrets.PYPI_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.NEOSPACE_PYPI_TOKEN || secrets.PYPI_TOKEN }}

@@ -53,11 +53,11 @@ class Files(SyncAPIResource):
     ) -> VectorStoreFile:
         """
         Create a vector store file by attaching a
-        [File](https://platform.openai.com/docs/api-reference/files) to a
-        [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object).
+        [File](https://platform.neospace.com/docs/api-reference/files) to a
+        [vector store](https://platform.neospace.com/docs/api-reference/vector-stores/object).
 
         Args:
-          file_id: A [File](https://platform.openai.com/docs/api-reference/files) ID that the
+          file_id: A [File](https://platform.neospace.com/docs/api-reference/files) ID that the
               vector store should use. Useful for tools like `file_search` that can access
               files.
 
@@ -74,7 +74,7 @@ class Files(SyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/vector_stores/{vector_store_id}/files",
             body=maybe_transform(
@@ -118,7 +118,7 @@ class Files(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get(
             f"/vector_stores/{vector_store_id}/files/{file_id}",
             options=make_request_options(
@@ -175,7 +175,7 @@ class Files(SyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             f"/vector_stores/{vector_store_id}/files",
             page=SyncCursorPage[VectorStoreFile],
@@ -214,7 +214,7 @@ class Files(SyncAPIResource):
 
         This will remove the file from the vector store but
         the file itself will not be deleted. To delete the file, use the
-        [delete file](https://platform.openai.com/docs/api-reference/files/delete)
+        [delete file](https://platform.neospace.com/docs/api-reference/files/delete)
         endpoint.
 
         Args:
@@ -230,7 +230,7 @@ class Files(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._delete(
             f"/vector_stores/{vector_store_id}/files/{file_id}",
             options=make_request_options(
@@ -282,7 +282,7 @@ class Files(SyncAPIResource):
             file = response.parse()
             if file.status == "in_progress":
                 if not is_given(poll_interval_ms):
-                    from_header = response.headers.get("openai-poll-after-ms")
+                    from_header = response.headers.get("neospace-poll-after-ms")
                     if from_header is not None:
                         poll_interval_ms = int(from_header)
                     else:
@@ -354,11 +354,11 @@ class AsyncFiles(AsyncAPIResource):
     ) -> VectorStoreFile:
         """
         Create a vector store file by attaching a
-        [File](https://platform.openai.com/docs/api-reference/files) to a
-        [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object).
+        [File](https://platform.neospace.com/docs/api-reference/files) to a
+        [vector store](https://platform.neospace.com/docs/api-reference/vector-stores/object).
 
         Args:
-          file_id: A [File](https://platform.openai.com/docs/api-reference/files) ID that the
+          file_id: A [File](https://platform.neospace.com/docs/api-reference/files) ID that the
               vector store should use. Useful for tools like `file_search` that can access
               files.
 
@@ -375,7 +375,7 @@ class AsyncFiles(AsyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/vector_stores/{vector_store_id}/files",
             body=await async_maybe_transform(
@@ -419,7 +419,7 @@ class AsyncFiles(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._get(
             f"/vector_stores/{vector_store_id}/files/{file_id}",
             options=make_request_options(
@@ -476,7 +476,7 @@ class AsyncFiles(AsyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             f"/vector_stores/{vector_store_id}/files",
             page=AsyncCursorPage[VectorStoreFile],
@@ -515,7 +515,7 @@ class AsyncFiles(AsyncAPIResource):
 
         This will remove the file from the vector store but
         the file itself will not be deleted. To delete the file, use the
-        [delete file](https://platform.openai.com/docs/api-reference/files/delete)
+        [delete file](https://platform.neospace.com/docs/api-reference/files/delete)
         endpoint.
 
         Args:
@@ -531,7 +531,7 @@ class AsyncFiles(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._delete(
             f"/vector_stores/{vector_store_id}/files/{file_id}",
             options=make_request_options(
@@ -583,7 +583,7 @@ class AsyncFiles(AsyncAPIResource):
             file = response.parse()
             if file.status == "in_progress":
                 if not is_given(poll_interval_ms):
-                    from_header = response.headers.get("openai-poll-after-ms")
+                    from_header = response.headers.get("neospace-poll-after-ms")
                     if from_header is not None:
                         poll_interval_ms = int(from_header)
                     else:

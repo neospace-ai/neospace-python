@@ -72,9 +72,9 @@ class Images(SyncAPIResource):
           size: The size of the generated images. Must be one of `256x256`, `512x512`, or
               `1024x1024`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help NeoSpace to monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+              [Learn more](https://platform.neospace.com/docs/guides/safety-best-practices/end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -153,9 +153,9 @@ class Images(SyncAPIResource):
           size: The size of the generated images. Must be one of `256x256`, `512x512`, or
               `1024x1024`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help NeoSpace to monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+              [Learn more](https://platform.neospace.com/docs/guides/safety-best-practices/end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -239,9 +239,9 @@ class Images(SyncAPIResource):
               Natural causes the model to produce more natural, less hyper-real looking
               images. This param is only supported for `dall-e-3`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help NeoSpace to monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+              [Learn more](https://platform.neospace.com/docs/guides/safety-best-practices/end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -318,9 +318,9 @@ class AsyncImages(AsyncAPIResource):
           size: The size of the generated images. Must be one of `256x256`, `512x512`, or
               `1024x1024`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help NeoSpace to monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+              [Learn more](https://platform.neospace.com/docs/guides/safety-best-practices/end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -399,9 +399,9 @@ class AsyncImages(AsyncAPIResource):
           size: The size of the generated images. Must be one of `256x256`, `512x512`, or
               `1024x1024`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help NeoSpace to monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+              [Learn more](https://platform.neospace.com/docs/guides/safety-best-practices/end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -485,9 +485,9 @@ class AsyncImages(AsyncAPIResource):
               Natural causes the model to produce more natural, less hyper-real looking
               images. This param is only supported for `dall-e-3`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help NeoSpace to monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+              [Learn more](https://platform.neospace.com/docs/guides/safety-best-practices/end-user-ids).
 
           extra_headers: Send extra headers
 

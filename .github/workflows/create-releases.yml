@@ -9,7 +9,7 @@ on:
 jobs:
   release:
     name: release
-    if: github.ref == 'refs/heads/main' && github.repository == 'openai/openai-python'
+    if: github.ref == 'refs/heads/main' && github.repository == 'neospace/neospace-python'
     runs-on: ubuntu-latest
     environment: publish
 
@@ -36,4 +36,4 @@ jobs:
         run: |
           bash ./bin/publish-pypi
         env:
-          PYPI_TOKEN: ${{ secrets.OPENAI_PYPI_TOKEN || secrets.PYPI_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.NEOSPACE_PYPI_TOKEN || secrets.PYPI_TOKEN }}

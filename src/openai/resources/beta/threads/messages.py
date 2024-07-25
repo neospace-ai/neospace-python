@@ -84,7 +84,7 @@ class Messages(SyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/threads/{thread_id}/messages",
             body=maybe_transform(
@@ -130,7 +130,7 @@ class Messages(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not message_id:
             raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get(
             f"/threads/{thread_id}/messages/{message_id}",
             options=make_request_options(
@@ -173,7 +173,7 @@ class Messages(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not message_id:
             raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/threads/{thread_id}/messages/{message_id}",
             body=maybe_transform({"metadata": metadata}, message_update_params.MessageUpdateParams),
@@ -231,7 +231,7 @@ class Messages(SyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             f"/threads/{thread_id}/messages",
             page=SyncCursorPage[Message],
@@ -282,7 +282,7 @@ class Messages(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not message_id:
             raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._delete(
             f"/threads/{thread_id}/messages/{message_id}",
             options=make_request_options(
@@ -347,7 +347,7 @@ class AsyncMessages(AsyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/threads/{thread_id}/messages",
             body=await async_maybe_transform(
@@ -393,7 +393,7 @@ class AsyncMessages(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not message_id:
             raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._get(
             f"/threads/{thread_id}/messages/{message_id}",
             options=make_request_options(
@@ -436,7 +436,7 @@ class AsyncMessages(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not message_id:
             raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/threads/{thread_id}/messages/{message_id}",
             body=await async_maybe_transform({"metadata": metadata}, message_update_params.MessageUpdateParams),
@@ -494,7 +494,7 @@ class AsyncMessages(AsyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             f"/threads/{thread_id}/messages",
             page=AsyncCursorPage[Message],
@@ -545,7 +545,7 @@ class AsyncMessages(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not message_id:
             raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._delete(
             f"/threads/{thread_id}/messages/{message_id}",
             options=make_request_options(

@@ -131,7 +131,7 @@ class Runs(SyncAPIResource):
 
         Args:
           assistant_id: The ID of the
-              [assistant](https://platform.openai.com/docs/api-reference/assistants) to use to
+              [assistant](https://platform.neospace.com/docs/api-reference/assistants) to use to
               execute this run.
 
           additional_instructions: Appends additional instructions at the end of the instructions for the run. This
@@ -141,7 +141,7 @@ class Runs(SyncAPIResource):
           additional_messages: Adds additional messages to the thread before creating the run.
 
           instructions: Overrides the
-              [instructions](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
+              [instructions](https://platform.neospace.com/docs/api-reference/assistants/createAssistant)
               of the assistant. This is useful for modifying the behavior on a per-run basis.
 
           max_completion_tokens: The maximum number of completion tokens that may be used over the course of the
@@ -161,18 +161,18 @@ class Runs(SyncAPIResource):
               can be a maximum of 64 characters long and values can be a maxium of 512
               characters long.
 
-          model: The ID of the [Model](https://platform.openai.com/docs/api-reference/models) to
+          model: The ID of the [Model](https://platform.neospace.com/docs/api-reference/models) to
               be used to execute this run. If a value is provided here, it will override the
               model associated with the assistant. If not, the model associated with the
               assistant will be used.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling/parallel-function-calling)
+              [parallel function calling](https://platform.neospace.com/docs/guides/function-calling/parallel-function-calling)
               during tool use.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -285,7 +285,7 @@ class Runs(SyncAPIResource):
 
         Args:
           assistant_id: The ID of the
-              [assistant](https://platform.openai.com/docs/api-reference/assistants) to use to
+              [assistant](https://platform.neospace.com/docs/api-reference/assistants) to use to
               execute this run.
 
           stream: If `true`, returns a stream of events that happen during the Run as server-sent
@@ -299,7 +299,7 @@ class Runs(SyncAPIResource):
           additional_messages: Adds additional messages to the thread before creating the run.
 
           instructions: Overrides the
-              [instructions](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
+              [instructions](https://platform.neospace.com/docs/api-reference/assistants/createAssistant)
               of the assistant. This is useful for modifying the behavior on a per-run basis.
 
           max_completion_tokens: The maximum number of completion tokens that may be used over the course of the
@@ -319,18 +319,18 @@ class Runs(SyncAPIResource):
               can be a maximum of 64 characters long and values can be a maxium of 512
               characters long.
 
-          model: The ID of the [Model](https://platform.openai.com/docs/api-reference/models) to
+          model: The ID of the [Model](https://platform.neospace.com/docs/api-reference/models) to
               be used to execute this run. If a value is provided here, it will override the
               model associated with the assistant. If not, the model associated with the
               assistant will be used.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling/parallel-function-calling)
+              [parallel function calling](https://platform.neospace.com/docs/guides/function-calling/parallel-function-calling)
               during tool use.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -439,7 +439,7 @@ class Runs(SyncAPIResource):
 
         Args:
           assistant_id: The ID of the
-              [assistant](https://platform.openai.com/docs/api-reference/assistants) to use to
+              [assistant](https://platform.neospace.com/docs/api-reference/assistants) to use to
               execute this run.
 
           stream: If `true`, returns a stream of events that happen during the Run as server-sent
@@ -453,7 +453,7 @@ class Runs(SyncAPIResource):
           additional_messages: Adds additional messages to the thread before creating the run.
 
           instructions: Overrides the
-              [instructions](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
+              [instructions](https://platform.neospace.com/docs/api-reference/assistants/createAssistant)
               of the assistant. This is useful for modifying the behavior on a per-run basis.
 
           max_completion_tokens: The maximum number of completion tokens that may be used over the course of the
@@ -473,18 +473,18 @@ class Runs(SyncAPIResource):
               can be a maximum of 64 characters long and values can be a maxium of 512
               characters long.
 
-          model: The ID of the [Model](https://platform.openai.com/docs/api-reference/models) to
+          model: The ID of the [Model](https://platform.neospace.com/docs/api-reference/models) to
               be used to execute this run. If a value is provided here, it will override the
               model associated with the assistant. If not, the model associated with the
               assistant will be used.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling/parallel-function-calling)
+              [parallel function calling](https://platform.neospace.com/docs/guides/function-calling/parallel-function-calling)
               during tool use.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -590,7 +590,7 @@ class Runs(SyncAPIResource):
     ) -> Run | Stream[AssistantStreamEvent]:
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/threads/{thread_id}/runs",
             body=maybe_transform(
@@ -650,7 +650,7 @@ class Runs(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get(
             f"/threads/{thread_id}/runs/{run_id}",
             options=make_request_options(
@@ -693,7 +693,7 @@ class Runs(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/threads/{thread_id}/runs/{run_id}",
             body=maybe_transform({"metadata": metadata}, run_update_params.RunUpdateParams),
@@ -748,7 +748,7 @@ class Runs(SyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             f"/threads/{thread_id}/runs",
             page=SyncCursorPage[Run],
@@ -798,7 +798,7 @@ class Runs(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/threads/{thread_id}/runs/{run_id}/cancel",
             options=make_request_options(
@@ -862,7 +862,7 @@ class Runs(SyncAPIResource):
         """
         A helper to create a run an poll for a terminal state. More information on Run
         lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         run = self.create(
             thread_id=thread_id,
@@ -1068,7 +1068,7 @@ class Runs(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
 
         extra_headers = {
-            "OpenAI-Beta": "assistants=v2",
+            "NeoSpace-Beta": "assistants=v2",
             "X-Stainless-Stream-Helper": "threads.runs.create_and_stream",
             "X-Stainless-Custom-Event-Handler": "true" if event_handler else "false",
             **(extra_headers or {}),
@@ -1118,7 +1118,7 @@ class Runs(SyncAPIResource):
         """
         A helper to poll a run status until it reaches a terminal state. More
         information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         extra_headers = {"X-Stainless-Poll-Helper": "true", **(extra_headers or {})}
 
@@ -1142,7 +1142,7 @@ class Runs(SyncAPIResource):
                 return run
 
             if not is_given(poll_interval_ms):
-                from_header = response.headers.get("openai-poll-after-ms")
+                from_header = response.headers.get("neospace-poll-after-ms")
                 if from_header is not None:
                     poll_interval_ms = int(from_header)
                 else:
@@ -1318,7 +1318,7 @@ class Runs(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
 
         extra_headers = {
-            "OpenAI-Beta": "assistants=v2",
+            "NeoSpace-Beta": "assistants=v2",
             "X-Stainless-Stream-Helper": "threads.runs.create_and_stream",
             "X-Stainless-Custom-Event-Handler": "true" if event_handler else "false",
             **(extra_headers or {}),
@@ -1488,7 +1488,7 @@ class Runs(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/threads/{thread_id}/runs/{run_id}/submit_tool_outputs",
             body=maybe_transform(
@@ -1523,7 +1523,7 @@ class Runs(SyncAPIResource):
         """
         A helper to submit a tool output to a run and poll for a terminal run state.
         More information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         run = self.submit_tool_outputs(
             run_id=run_id,
@@ -1562,7 +1562,7 @@ class Runs(SyncAPIResource):
         """
         Submit the tool outputs from a previous run and stream the run to a terminal
         state. More information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         ...
 
@@ -1584,7 +1584,7 @@ class Runs(SyncAPIResource):
         """
         Submit the tool outputs from a previous run and stream the run to a terminal
         state. More information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         ...
 
@@ -1605,7 +1605,7 @@ class Runs(SyncAPIResource):
         """
         Submit the tool outputs from a previous run and stream the run to a terminal
         state. More information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
@@ -1614,7 +1614,7 @@ class Runs(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
 
         extra_headers = {
-            "OpenAI-Beta": "assistants=v2",
+            "NeoSpace-Beta": "assistants=v2",
             "X-Stainless-Stream-Helper": "threads.runs.submit_tool_outputs_stream",
             "X-Stainless-Custom-Event-Handler": "true" if event_handler else "false",
             **(extra_headers or {}),
@@ -1713,7 +1713,7 @@ class AsyncRuns(AsyncAPIResource):
 
         Args:
           assistant_id: The ID of the
-              [assistant](https://platform.openai.com/docs/api-reference/assistants) to use to
+              [assistant](https://platform.neospace.com/docs/api-reference/assistants) to use to
               execute this run.
 
           additional_instructions: Appends additional instructions at the end of the instructions for the run. This
@@ -1723,7 +1723,7 @@ class AsyncRuns(AsyncAPIResource):
           additional_messages: Adds additional messages to the thread before creating the run.
 
           instructions: Overrides the
-              [instructions](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
+              [instructions](https://platform.neospace.com/docs/api-reference/assistants/createAssistant)
               of the assistant. This is useful for modifying the behavior on a per-run basis.
 
           max_completion_tokens: The maximum number of completion tokens that may be used over the course of the
@@ -1743,18 +1743,18 @@ class AsyncRuns(AsyncAPIResource):
               can be a maximum of 64 characters long and values can be a maxium of 512
               characters long.
 
-          model: The ID of the [Model](https://platform.openai.com/docs/api-reference/models) to
+          model: The ID of the [Model](https://platform.neospace.com/docs/api-reference/models) to
               be used to execute this run. If a value is provided here, it will override the
               model associated with the assistant. If not, the model associated with the
               assistant will be used.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling/parallel-function-calling)
+              [parallel function calling](https://platform.neospace.com/docs/guides/function-calling/parallel-function-calling)
               during tool use.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -1867,7 +1867,7 @@ class AsyncRuns(AsyncAPIResource):
 
         Args:
           assistant_id: The ID of the
-              [assistant](https://platform.openai.com/docs/api-reference/assistants) to use to
+              [assistant](https://platform.neospace.com/docs/api-reference/assistants) to use to
               execute this run.
 
           stream: If `true`, returns a stream of events that happen during the Run as server-sent
@@ -1881,7 +1881,7 @@ class AsyncRuns(AsyncAPIResource):
           additional_messages: Adds additional messages to the thread before creating the run.
 
           instructions: Overrides the
-              [instructions](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
+              [instructions](https://platform.neospace.com/docs/api-reference/assistants/createAssistant)
               of the assistant. This is useful for modifying the behavior on a per-run basis.
 
           max_completion_tokens: The maximum number of completion tokens that may be used over the course of the
@@ -1901,18 +1901,18 @@ class AsyncRuns(AsyncAPIResource):
               can be a maximum of 64 characters long and values can be a maxium of 512
               characters long.
 
-          model: The ID of the [Model](https://platform.openai.com/docs/api-reference/models) to
+          model: The ID of the [Model](https://platform.neospace.com/docs/api-reference/models) to
               be used to execute this run. If a value is provided here, it will override the
               model associated with the assistant. If not, the model associated with the
               assistant will be used.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling/parallel-function-calling)
+              [parallel function calling](https://platform.neospace.com/docs/guides/function-calling/parallel-function-calling)
               during tool use.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -2021,7 +2021,7 @@ class AsyncRuns(AsyncAPIResource):
 
         Args:
           assistant_id: The ID of the
-              [assistant](https://platform.openai.com/docs/api-reference/assistants) to use to
+              [assistant](https://platform.neospace.com/docs/api-reference/assistants) to use to
               execute this run.
 
           stream: If `true`, returns a stream of events that happen during the Run as server-sent
@@ -2035,7 +2035,7 @@ class AsyncRuns(AsyncAPIResource):
           additional_messages: Adds additional messages to the thread before creating the run.
 
           instructions: Overrides the
-              [instructions](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
+              [instructions](https://platform.neospace.com/docs/api-reference/assistants/createAssistant)
               of the assistant. This is useful for modifying the behavior on a per-run basis.
 
           max_completion_tokens: The maximum number of completion tokens that may be used over the course of the
@@ -2055,18 +2055,18 @@ class AsyncRuns(AsyncAPIResource):
               can be a maximum of 64 characters long and values can be a maxium of 512
               characters long.
 
-          model: The ID of the [Model](https://platform.openai.com/docs/api-reference/models) to
+          model: The ID of the [Model](https://platform.neospace.com/docs/api-reference/models) to
               be used to execute this run. If a value is provided here, it will override the
               model associated with the assistant. If not, the model associated with the
               assistant will be used.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling/parallel-function-calling)
+              [parallel function calling](https://platform.neospace.com/docs/guides/function-calling/parallel-function-calling)
               during tool use.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+              [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -2172,7 +2172,7 @@ class AsyncRuns(AsyncAPIResource):
     ) -> Run | AsyncStream[AssistantStreamEvent]:
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/threads/{thread_id}/runs",
             body=await async_maybe_transform(
@@ -2232,7 +2232,7 @@ class AsyncRuns(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._get(
             f"/threads/{thread_id}/runs/{run_id}",
             options=make_request_options(
@@ -2275,7 +2275,7 @@ class AsyncRuns(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/threads/{thread_id}/runs/{run_id}",
             body=await async_maybe_transform({"metadata": metadata}, run_update_params.RunUpdateParams),
@@ -2330,7 +2330,7 @@ class AsyncRuns(AsyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             f"/threads/{thread_id}/runs",
             page=AsyncCursorPage[Run],
@@ -2380,7 +2380,7 @@ class AsyncRuns(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/threads/{thread_id}/runs/{run_id}/cancel",
             options=make_request_options(
@@ -2444,7 +2444,7 @@ class AsyncRuns(AsyncAPIResource):
         """
         A helper to create a run an poll for a terminal state. More information on Run
         lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         run = await self.create(
             thread_id=thread_id,
@@ -2653,7 +2653,7 @@ class AsyncRuns(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
 
         extra_headers = {
-            "OpenAI-Beta": "assistants=v2",
+            "NeoSpace-Beta": "assistants=v2",
             "X-Stainless-Stream-Helper": "threads.runs.create_and_stream",
             "X-Stainless-Custom-Event-Handler": "true" if event_handler else "false",
             **(extra_headers or {}),
@@ -2702,7 +2702,7 @@ class AsyncRuns(AsyncAPIResource):
         """
         A helper to poll a run status until it reaches a terminal state. More
         information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         extra_headers = {"X-Stainless-Poll-Helper": "true", **(extra_headers or {})}
 
@@ -2726,7 +2726,7 @@ class AsyncRuns(AsyncAPIResource):
                 return run
 
             if not is_given(poll_interval_ms):
-                from_header = response.headers.get("openai-poll-after-ms")
+                from_header = response.headers.get("neospace-poll-after-ms")
                 if from_header is not None:
                     poll_interval_ms = int(from_header)
                 else:
@@ -2905,7 +2905,7 @@ class AsyncRuns(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
 
         extra_headers = {
-            "OpenAI-Beta": "assistants=v2",
+            "NeoSpace-Beta": "assistants=v2",
             "X-Stainless-Stream-Helper": "threads.runs.create_and_stream",
             "X-Stainless-Custom-Event-Handler": "true" if event_handler else "false",
             **(extra_headers or {}),
@@ -3074,7 +3074,7 @@ class AsyncRuns(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/threads/{thread_id}/runs/{run_id}/submit_tool_outputs",
             body=await async_maybe_transform(
@@ -3109,7 +3109,7 @@ class AsyncRuns(AsyncAPIResource):
         """
         A helper to submit a tool output to a run and poll for a terminal run state.
         More information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         run = await self.submit_tool_outputs(
             run_id=run_id,
@@ -3148,7 +3148,7 @@ class AsyncRuns(AsyncAPIResource):
         """
         Submit the tool outputs from a previous run and stream the run to a terminal
         state. More information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         ...
 
@@ -3170,7 +3170,7 @@ class AsyncRuns(AsyncAPIResource):
         """
         Submit the tool outputs from a previous run and stream the run to a terminal
         state. More information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         ...
 
@@ -3194,7 +3194,7 @@ class AsyncRuns(AsyncAPIResource):
         """
         Submit the tool outputs from a previous run and stream the run to a terminal
         state. More information on Run lifecycles can be found here:
-        https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+        https://platform.neospace.com/docs/assistants/how-it-works/runs-and-run-steps
         """
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
@@ -3203,7 +3203,7 @@ class AsyncRuns(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
 
         extra_headers = {
-            "OpenAI-Beta": "assistants=v2",
+            "NeoSpace-Beta": "assistants=v2",
             "X-Stainless-Stream-Helper": "threads.runs.submit_tool_outputs_stream",
             "X-Stainless-Custom-Event-Handler": "true" if event_handler else "false",
             **(extra_headers or {}),

@@ -1,11 +1,11 @@
 [project]
-name = "openai"
+name = "neospace"
 version = "1.37.0"
-description = "The official Python library for the openai API"
+description = "The official Python library for the neospace API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "OpenAI", email = "support@openai.com" },
+{ name = "NeoSpace", email = "support@neospace.com" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
@@ -40,11 +40,11 @@ classifiers = [
 datalib = ["numpy >= 1", "pandas >= 1.2.3", "pandas-stubs >= 1.1.0.11"]
 
 [project.urls]
-Homepage = "https://github.com/openai/openai-python"
-Repository = "https://github.com/openai/openai-python"
+Homepage = "https://github.com/neospace/neospace-python"
+Repository = "https://github.com/neospace/neospace-python"
 
 [project.scripts]
-openai = "openai.cli:main"
+neospace = "neospace.cli:main"
 
 [tool.rye]
 managed = true
@@ -91,7 +91,7 @@ typecheck = { chain = [
   "typecheck:mypy"
 ]}
 "typecheck:pyright" = "pyright"
-"typecheck:verify-types" = "pyright --verifytypes openai --ignoreexternal"
+"typecheck:verify-types" = "pyright --verifytypes neospace --ignoreexternal"
 "typecheck:mypy" = "mypy ."
 
 [build-system]
@@ -104,7 +104,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/openai"]
+packages = ["src/neospace"]
 
 [tool.hatch.build.targets.sdist]
 # Basically everything except hidden files/directories (such as .github, .devcontainers, .python-version, etc)
@@ -130,7 +130,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/openai/openai-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/neospace/neospace-python/tree/main/\g<2>)'
 
 [tool.black]
 line-length = 120
@@ -209,7 +209,7 @@ length-sort = true
 length-sort-straight = true
 combine-as-imports = true
 extra-standard-library = ["typing_extensions"]
-known-first-party = ["openai", "tests"]
+known-first-party = ["neospace", "tests"]
 
 [tool.ruff.per-file-ignores]
 "bin/**.py" = ["T201", "T203"]

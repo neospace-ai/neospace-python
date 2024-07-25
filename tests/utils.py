@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from openai._types import NoneType
-from openai._utils import (
+from neospace._types import NoneType
+from neospace._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -17,8 +17,8 @@ from openai._utils import (
     extract_type_arg,
     is_annotated_type,
 )
-from openai._compat import PYDANTIC_V2, field_outer_type, get_model_fields
-from openai._models import BaseModel
+from neospace._compat import PYDANTIC_V2, field_outer_type, get_model_fields
+from neospace._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 

@@ -1,14 +1,14 @@
-import openai
+import neospace
 
-# will default to `os.environ['OPENAI_API_KEY']` if not explicitly set
-openai.api_key = "..."
+# will default to `os.environ['NEOSPACE_API_KEY']` if not explicitly set
+neospace.api_key = "..."
 
-# all client options can be configured just like the `OpenAI` instantiation counterpart
-openai.base_url = "https://..."
-openai.default_headers = {"x-foo": "true"}
+# all client options can be configured just like the `NeoSpace` instantiation counterpart
+neospace.base_url = "https://..."
+neospace.default_headers = {"x-foo": "true"}
 
 # all API calls work in the exact same fashion as well
-stream = openai.chat.completions.create(
+stream = neospace.chat.completions.create(
     model="gpt-4",
     messages=[
         {

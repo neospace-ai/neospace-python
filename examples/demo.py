@@ -1,9 +1,9 @@
 #!/usr/bin/env -S poetry run python
 
-from openai import OpenAI
+from neospace import NeoSpace
 
-# gets API Key from environment variable OPENAI_API_KEY
-client = OpenAI()
+# gets API Key from environment variable NEOSPACE_API_KEY
+client = NeoSpace()
 
 # Non-streaming:
 print("----- standard request -----")

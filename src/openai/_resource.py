@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING
 import anyio
 
 if TYPE_CHECKING:
-    from ._client import OpenAI, AsyncOpenAI
+    from ._client import NeoSpace, AsyncNeoSpace
 
 
 class SyncAPIResource:
-    _client: OpenAI
+    _client: NeoSpace
 
-    def __init__(self, client: OpenAI) -> None:
+    def __init__(self, client: NeoSpace) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post
@@ -28,9 +28,9 @@ class SyncAPIResource:
 
 
 class AsyncAPIResource:
-    _client: AsyncOpenAI
+    _client: AsyncNeoSpace
 
-    def __init__(self, client: AsyncOpenAI) -> None:
+    def __init__(self, client: AsyncNeoSpace) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post

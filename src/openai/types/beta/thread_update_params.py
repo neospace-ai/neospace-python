@@ -29,7 +29,7 @@ class ThreadUpdateParams(TypedDict, total=False):
 class ToolResourcesCodeInterpreter(TypedDict, total=False):
     file_ids: List[str]
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs made
+    A list of [file](https://platform.neospace.com/docs/api-reference/files) IDs made
     available to the `code_interpreter` tool. There can be a maximum of 20 files
     associated with the tool.
     """
@@ -39,7 +39,7 @@ class ToolResourcesFileSearch(TypedDict, total=False):
     vector_store_ids: List[str]
     """
     The
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://platform.neospace.com/docs/api-reference/vector-stores/object)
     attached to this thread. There can be a maximum of 1 vector store attached to
     the thread.
     """

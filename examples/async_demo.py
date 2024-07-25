@@ -2,10 +2,10 @@
 
 import asyncio
 
-from openai import AsyncOpenAI
+from neospace import AsyncNeoSpace
 
-# gets API Key from environment variable OPENAI_API_KEY
-client = AsyncOpenAI()
+# gets API Key from environment variable NEOSPACE_API_KEY
+client = AsyncNeoSpace()
 
 
 async def main() -> None:

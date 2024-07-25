@@ -3,10 +3,10 @@
 import time
 from pathlib import Path
 
-from openai import OpenAI
+from neospace import NeoSpace
 
-# gets OPENAI_API_KEY from your environment variables
-openai = OpenAI()
+# gets NEOSPACE_API_KEY from your environment variables
+neospace = NeoSpace()
 
 speech_file_path = Path(__file__).parent / "speech.mp3"
 
@@ -15,7 +15,7 @@ def main() -> None:
     stream_to_speakers()
 
     # Create text-to-speech audio file
-    with openai.audio.speech.with_streaming_response.create(
+    with neospace.audio.speech.with_streaming_response.create(
         model="tts-1",
         voice="alloy",
         input="the quick brown fox jumped over the lazy dogs",
@@ -23,14 +23,14 @@ def main() -> None:
         response.stream_to_file(speech_file_path)
 
     # Create transcription from audio file
-    transcription = openai.audio.transcriptions.create(
+    transcription = neospace.audio.transcriptions.create(
         model="whisper-1",
         file=speech_file_path,
     )
     print(transcription.text)
 
     # Create translation from audio file
-    translation = openai.audio.translations.create(
+    translation = neospace.audio.translations.create(
         model="whisper-1",
         file=speech_file_path,
     )
@@ -44,7 +44,7 @@ def stream_to_speakers() -> None:
 
     start_time = time.time()
 
-    with openai.audio.speech.with_streaming_response.create(
+    with neospace.audio.speech.with_streaming_response.create(
         model="tts-1",
         voice="alloy",
         response_format="pcm",  # similar to WAV, but without a header chunk at the start.

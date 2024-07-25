@@ -86,7 +86,7 @@ class Run(BaseModel):
     assistant_id: str
     """
     The ID of the
-    [assistant](https://platform.openai.com/docs/api-reference/assistants) used for
+    [assistant](https://platform.neospace.com/docs/api-reference/assistants) used for
     execution of this run.
     """
 
@@ -114,7 +114,7 @@ class Run(BaseModel):
     instructions: str
     """
     The instructions that the
-    [assistant](https://platform.openai.com/docs/api-reference/assistants) used for
+    [assistant](https://platform.neospace.com/docs/api-reference/assistants) used for
     this run.
     """
 
@@ -144,7 +144,7 @@ class Run(BaseModel):
     model: str
     """
     The model that the
-    [assistant](https://platform.openai.com/docs/api-reference/assistants) used for
+    [assistant](https://platform.neospace.com/docs/api-reference/assistants) used for
     this run.
     """
 
@@ -154,7 +154,7 @@ class Run(BaseModel):
     parallel_tool_calls: bool
     """
     Whether to enable
-    [parallel function calling](https://platform.openai.com/docs/guides/function-calling/parallel-function-calling)
+    [parallel function calling](https://platform.neospace.com/docs/guides/function-calling/parallel-function-calling)
     during tool use.
     """
 
@@ -167,8 +167,8 @@ class Run(BaseModel):
     response_format: Optional[AssistantResponseFormatOption] = None
     """Specifies the format that the model must output.
 
-    Compatible with [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-    [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+    Compatible with [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+    [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
     and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -195,7 +195,7 @@ class Run(BaseModel):
 
     thread_id: str
     """
-    The ID of the [thread](https://platform.openai.com/docs/api-reference/threads)
+    The ID of the [thread](https://platform.neospace.com/docs/api-reference/threads)
     that was executed on as a part of this run.
     """
 
@@ -213,7 +213,7 @@ class Run(BaseModel):
     tools: List[AssistantTool]
     """
     The list of tools that the
-    [assistant](https://platform.openai.com/docs/api-reference/assistants) used for
+    [assistant](https://platform.neospace.com/docs/api-reference/assistants) used for
     this run.
     """
 

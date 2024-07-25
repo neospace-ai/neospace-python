@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
-from openai import OpenAI, AsyncOpenAI
+from neospace import NeoSpace, AsyncNeoSpace
 from tests.utils import assert_matches_type
-from openai.pagination import SyncCursorPage, AsyncCursorPage
-from openai.types.beta import (
+from neospace.pagination import SyncCursorPage, AsyncCursorPage
+from neospace.types.beta import (
     Assistant,
     AssistantDeleted,
 )
@@ -22,14 +22,14 @@ class TestAssistants:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_create(self, client: OpenAI) -> None:
+    def test_method_create(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.create(
             model="gpt-4-turbo",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params(self, client: OpenAI) -> None:
+    def test_method_create_with_all_params(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.create(
             model="gpt-4-turbo",
             description="string",
@@ -57,7 +57,7 @@ class TestAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    def test_raw_response_create(self, client: OpenAI) -> None:
+    def test_raw_response_create(self, client: NeoSpace) -> None:
         response = client.beta.assistants.with_raw_response.create(
             model="gpt-4-turbo",
         )
@@ -68,7 +68,7 @@ class TestAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    def test_streaming_response_create(self, client: OpenAI) -> None:
+    def test_streaming_response_create(self, client: NeoSpace) -> None:
         with client.beta.assistants.with_streaming_response.create(
             model="gpt-4-turbo",
         ) as response:
@@ -81,14 +81,14 @@ class TestAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_retrieve(self, client: OpenAI) -> None:
+    def test_method_retrieve(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.retrieve(
             "string",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    def test_raw_response_retrieve(self, client: OpenAI) -> None:
+    def test_raw_response_retrieve(self, client: NeoSpace) -> None:
         response = client.beta.assistants.with_raw_response.retrieve(
             "string",
         )
@@ -99,7 +99,7 @@ class TestAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    def test_streaming_response_retrieve(self, client: OpenAI) -> None:
+    def test_streaming_response_retrieve(self, client: NeoSpace) -> None:
         with client.beta.assistants.with_streaming_response.retrieve(
             "string",
         ) as response:
@@ -112,21 +112,21 @@ class TestAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: OpenAI) -> None:
+    def test_path_params_retrieve(self, client: NeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `assistant_id` but received ''"):
             client.beta.assistants.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
-    def test_method_update(self, client: OpenAI) -> None:
+    def test_method_update(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.update(
             "string",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    def test_method_update_with_all_params(self, client: OpenAI) -> None:
+    def test_method_update_with_all_params(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.update(
             "string",
             description="string",
@@ -146,7 +146,7 @@ class TestAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    def test_raw_response_update(self, client: OpenAI) -> None:
+    def test_raw_response_update(self, client: NeoSpace) -> None:
         response = client.beta.assistants.with_raw_response.update(
             "string",
         )
@@ -157,7 +157,7 @@ class TestAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    def test_streaming_response_update(self, client: OpenAI) -> None:
+    def test_streaming_response_update(self, client: NeoSpace) -> None:
         with client.beta.assistants.with_streaming_response.update(
             "string",
         ) as response:
@@ -170,19 +170,19 @@ class TestAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_update(self, client: OpenAI) -> None:
+    def test_path_params_update(self, client: NeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `assistant_id` but received ''"):
             client.beta.assistants.with_raw_response.update(
                 "",
             )
 
     @parametrize
-    def test_method_list(self, client: OpenAI) -> None:
+    def test_method_list(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.list()
         assert_matches_type(SyncCursorPage[Assistant], assistant, path=["response"])
 
     @parametrize
-    def test_method_list_with_all_params(self, client: OpenAI) -> None:
+    def test_method_list_with_all_params(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.list(
             after="string",
             before="string",
@@ -192,7 +192,7 @@ class TestAssistants:
         assert_matches_type(SyncCursorPage[Assistant], assistant, path=["response"])
 
     @parametrize
-    def test_raw_response_list(self, client: OpenAI) -> None:
+    def test_raw_response_list(self, client: NeoSpace) -> None:
         response = client.beta.assistants.with_raw_response.list()
 
         assert response.is_closed is True
@@ -201,7 +201,7 @@ class TestAssistants:
         assert_matches_type(SyncCursorPage[Assistant], assistant, path=["response"])
 
     @parametrize
-    def test_streaming_response_list(self, client: OpenAI) -> None:
+    def test_streaming_response_list(self, client: NeoSpace) -> None:
         with client.beta.assistants.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -212,14 +212,14 @@ class TestAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_delete(self, client: OpenAI) -> None:
+    def test_method_delete(self, client: NeoSpace) -> None:
         assistant = client.beta.assistants.delete(
             "string",
         )
         assert_matches_type(AssistantDeleted, assistant, path=["response"])
 
     @parametrize
-    def test_raw_response_delete(self, client: OpenAI) -> None:
+    def test_raw_response_delete(self, client: NeoSpace) -> None:
         response = client.beta.assistants.with_raw_response.delete(
             "string",
         )
@@ -230,7 +230,7 @@ class TestAssistants:
         assert_matches_type(AssistantDeleted, assistant, path=["response"])
 
     @parametrize
-    def test_streaming_response_delete(self, client: OpenAI) -> None:
+    def test_streaming_response_delete(self, client: NeoSpace) -> None:
         with client.beta.assistants.with_streaming_response.delete(
             "string",
         ) as response:
@@ -243,7 +243,7 @@ class TestAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_delete(self, client: OpenAI) -> None:
+    def test_path_params_delete(self, client: NeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `assistant_id` but received ''"):
             client.beta.assistants.with_raw_response.delete(
                 "",
@@ -254,14 +254,14 @@ class TestAsyncAssistants:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_create(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.create(
             model="gpt-4-turbo",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create_with_all_params(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.create(
             model="gpt-4-turbo",
             description="string",
@@ -289,7 +289,7 @@ class TestAsyncAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_create(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.assistants.with_raw_response.create(
             model="gpt-4-turbo",
         )
@@ -300,7 +300,7 @@ class TestAsyncAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.assistants.with_streaming_response.create(
             model="gpt-4-turbo",
         ) as response:
@@ -313,14 +313,14 @@ class TestAsyncAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_retrieve(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.retrieve(
             "string",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.assistants.with_raw_response.retrieve(
             "string",
         )
@@ -331,7 +331,7 @@ class TestAsyncAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.assistants.with_streaming_response.retrieve(
             "string",
         ) as response:
@@ -344,21 +344,21 @@ class TestAsyncAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncNeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `assistant_id` but received ''"):
             await async_client.beta.assistants.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
-    async def test_method_update(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_update(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.update(
             "string",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.update(
             "string",
             description="string",
@@ -378,7 +378,7 @@ class TestAsyncAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_update(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.assistants.with_raw_response.update(
             "string",
         )
@@ -389,7 +389,7 @@ class TestAsyncAssistants:
         assert_matches_type(Assistant, assistant, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.assistants.with_streaming_response.update(
             "string",
         ) as response:
@@ -402,19 +402,19 @@ class TestAsyncAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncOpenAI) -> None:
+    async def test_path_params_update(self, async_client: AsyncNeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `assistant_id` but received ''"):
             await async_client.beta.assistants.with_raw_response.update(
                 "",
             )
 
     @parametrize
-    async def test_method_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_list(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.list()
         assert_matches_type(AsyncCursorPage[Assistant], assistant, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.list(
             after="string",
             before="string",
@@ -424,7 +424,7 @@ class TestAsyncAssistants:
         assert_matches_type(AsyncCursorPage[Assistant], assistant, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_list(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.assistants.with_raw_response.list()
 
         assert response.is_closed is True
@@ -433,7 +433,7 @@ class TestAsyncAssistants:
         assert_matches_type(AsyncCursorPage[Assistant], assistant, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.assistants.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -444,14 +444,14 @@ class TestAsyncAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_delete(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_delete(self, async_client: AsyncNeoSpace) -> None:
         assistant = await async_client.beta.assistants.delete(
             "string",
         )
         assert_matches_type(AssistantDeleted, assistant, path=["response"])
 
     @parametrize
-    async def test_raw_response_delete(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_delete(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.assistants.with_raw_response.delete(
             "string",
         )
@@ -462,7 +462,7 @@ class TestAsyncAssistants:
         assert_matches_type(AssistantDeleted, assistant, path=["response"])
 
     @parametrize
-    async def test_streaming_response_delete(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_delete(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.assistants.with_streaming_response.delete(
             "string",
         ) as response:
@@ -475,7 +475,7 @@ class TestAsyncAssistants:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_delete(self, async_client: AsyncOpenAI) -> None:
+    async def test_path_params_delete(self, async_client: AsyncNeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `assistant_id` but received ''"):
             await async_client.beta.assistants.with_raw_response.delete(
                 "",

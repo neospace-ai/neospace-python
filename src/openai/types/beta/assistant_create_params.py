@@ -54,9 +54,9 @@ class AssistantCreateParams(TypedDict, total=False):
     """ID of the model to use.
 
     You can use the
-    [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+    [List models](https://platform.neospace.com/docs/api-reference/models/list) API to
     see all of your available models, or see our
-    [Model overview](https://platform.openai.com/docs/models/overview) for
+    [Model overview](https://platform.neospace.com/docs/models/overview) for
     descriptions of them.
     """
 
@@ -83,8 +83,8 @@ class AssistantCreateParams(TypedDict, total=False):
     response_format: Optional[AssistantResponseFormatOptionParam]
     """Specifies the format that the model must output.
 
-    Compatible with [GPT-4o](https://platform.openai.com/docs/models/gpt-4o),
-    [GPT-4 Turbo](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4),
+    Compatible with [GPT-4o](https://platform.neospace.com/docs/models/gpt-4o),
+    [GPT-4 Turbo](https://platform.neospace.com/docs/models/gpt-4-turbo-and-gpt-4),
     and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
@@ -134,7 +134,7 @@ class AssistantCreateParams(TypedDict, total=False):
 class ToolResourcesCodeInterpreter(TypedDict, total=False):
     file_ids: List[str]
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs made
+    A list of [file](https://platform.neospace.com/docs/api-reference/files) IDs made
     available to the `code_interpreter` tool. There can be a maximum of 20 files
     associated with the tool.
     """
@@ -181,7 +181,7 @@ class ToolResourcesFileSearchVectorStore(TypedDict, total=False):
 
     file_ids: List[str]
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs to
+    A list of [file](https://platform.neospace.com/docs/api-reference/files) IDs to
     add to the vector store. There can be a maximum of 10000 files in a vector
     store.
     """
@@ -199,7 +199,7 @@ class ToolResourcesFileSearch(TypedDict, total=False):
     vector_store_ids: List[str]
     """
     The
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://platform.neospace.com/docs/api-reference/vector-stores/object)
     attached to this assistant. There can be a maximum of 1 vector store attached to
     the assistant.
     """
@@ -207,7 +207,7 @@ class ToolResourcesFileSearch(TypedDict, total=False):
     vector_stores: Iterable[ToolResourcesFileSearchVectorStore]
     """
     A helper to create a
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://platform.neospace.com/docs/api-reference/vector-stores/object)
     with file_ids and attach it to this assistant. There can be a maximum of 1
     vector store attached to the assistant.
     """

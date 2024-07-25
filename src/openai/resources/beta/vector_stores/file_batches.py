@@ -59,7 +59,7 @@ class FileBatches(SyncAPIResource):
         Create a vector store file batch.
 
         Args:
-          file_ids: A list of [File](https://platform.openai.com/docs/api-reference/files) IDs that
+          file_ids: A list of [File](https://platform.neospace.com/docs/api-reference/files) IDs that
               the vector store should use. Useful for tools like `file_search` that can access
               files.
 
@@ -76,7 +76,7 @@ class FileBatches(SyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/vector_stores/{vector_store_id}/file_batches",
             body=maybe_transform(
@@ -120,7 +120,7 @@ class FileBatches(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get(
             f"/vector_stores/{vector_store_id}/file_batches/{batch_id}",
             options=make_request_options(
@@ -159,7 +159,7 @@ class FileBatches(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/vector_stores/{vector_store_id}/file_batches/{batch_id}/cancel",
             options=make_request_options(
@@ -240,7 +240,7 @@ class FileBatches(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             f"/vector_stores/{vector_store_id}/file_batches/{batch_id}/files",
             page=SyncCursorPage[VectorStoreFile],
@@ -289,7 +289,7 @@ class FileBatches(SyncAPIResource):
             batch = response.parse()
             if batch.file_counts.in_progress > 0:
                 if not is_given(poll_interval_ms):
-                    from_header = response.headers.get("openai-poll-after-ms")
+                    from_header = response.headers.get("neospace-poll-after-ms")
                     if from_header is not None:
                         poll_interval_ms = int(from_header)
                     else:
@@ -377,7 +377,7 @@ class AsyncFileBatches(AsyncAPIResource):
         Create a vector store file batch.
 
         Args:
-          file_ids: A list of [File](https://platform.openai.com/docs/api-reference/files) IDs that
+          file_ids: A list of [File](https://platform.neospace.com/docs/api-reference/files) IDs that
               the vector store should use. Useful for tools like `file_search` that can access
               files.
 
@@ -394,7 +394,7 @@ class AsyncFileBatches(AsyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/vector_stores/{vector_store_id}/file_batches",
             body=await async_maybe_transform(
@@ -438,7 +438,7 @@ class AsyncFileBatches(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._get(
             f"/vector_stores/{vector_store_id}/file_batches/{batch_id}",
             options=make_request_options(
@@ -477,7 +477,7 @@ class AsyncFileBatches(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/vector_stores/{vector_store_id}/file_batches/{batch_id}/cancel",
             options=make_request_options(
@@ -558,7 +558,7 @@ class AsyncFileBatches(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             f"/vector_stores/{vector_store_id}/file_batches/{batch_id}/files",
             page=AsyncCursorPage[VectorStoreFile],
@@ -607,7 +607,7 @@ class AsyncFileBatches(AsyncAPIResource):
             batch = response.parse()
             if batch.file_counts.in_progress > 0:
                 if not is_given(poll_interval_ms):
-                    from_header = response.headers.get("openai-poll-after-ms")
+                    from_header = response.headers.get("neospace-poll-after-ms")
                     if from_header is not None:
                         poll_interval_ms = int(from_header)
                     else:

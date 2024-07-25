@@ -26,7 +26,7 @@ from ._utils import (
 )
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import OpenAIError, APIStatusError
+from ._exceptions import NeoSpaceError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -39,14 +39,14 @@ __all__ = [
     "ProxiesTypes",
     "RequestOptions",
     "resources",
-    "OpenAI",
-    "AsyncOpenAI",
+    "NeoSpace",
+    "AsyncNeoSpace",
     "Client",
     "AsyncClient",
 ]
 
 
-class OpenAI(SyncAPIClient):
+class NeoSpace(SyncAPIClient):
     completions: resources.Completions
     chat: resources.Chat
     embeddings: resources.Embeddings
@@ -59,8 +59,8 @@ class OpenAI(SyncAPIClient):
     beta: resources.Beta
     batches: resources.Batches
     uploads: resources.Uploads
-    with_raw_response: OpenAIWithRawResponse
-    with_streaming_response: OpenAIWithStreamedResponse
+    with_raw_response: NeoSpaceWithRawResponse
+    with_streaming_response: NeoSpaceWithStreamedResponse
 
     # client options
     api_key: str
@@ -92,33 +92,33 @@ class OpenAI(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous openai client instance.
+        """Construct a new synchronous neospace client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `OPENAI_API_KEY`
-        - `organization` from `OPENAI_ORG_ID`
-        - `project` from `OPENAI_PROJECT_ID`
+        - `api_key` from `NEOSPACE_API_KEY`
+        - `organization` from `NEOSPACE_ORG_ID`
+        - `project` from `NEOSPACE_PROJECT_ID`
         """
         if api_key is None:
-            api_key = os.environ.get("OPENAI_API_KEY")
+            api_key = os.environ.get("NEOSPACE_API_KEY")
         if api_key is None:
-            raise OpenAIError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable"
+            raise NeoSpaceError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the NEOSPACE_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if organization is None:
-            organization = os.environ.get("OPENAI_ORG_ID")
+            organization = os.environ.get("NEOSPACE_ORG_ID")
         self.organization = organization
 
         if project is None:
-            project = os.environ.get("OPENAI_PROJECT_ID")
+            project = os.environ.get("NEOSPACE_PROJECT_ID")
         self.project = project
 
         if base_url is None:
-            base_url = os.environ.get("OPENAI_BASE_URL")
+            base_url = os.environ.get("NEOSPACE_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.openai.com/v1"
+            base_url = f"https://api.neospace.com/v1"
 
         super().__init__(
             version=__version__,
@@ -145,8 +145,8 @@ class OpenAI(SyncAPIClient):
         self.beta = resources.Beta(self)
         self.batches = resources.Batches(self)
         self.uploads = resources.Uploads(self)
-        self.with_raw_response = OpenAIWithRawResponse(self)
-        self.with_streaming_response = OpenAIWithStreamedResponse(self)
+        self.with_raw_response = NeoSpaceWithRawResponse(self)
+        self.with_streaming_response = NeoSpaceWithStreamedResponse(self)
 
     @property
     @override
@@ -165,8 +165,8 @@ class OpenAI(SyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
-            "OpenAI-Organization": self.organization if self.organization is not None else Omit(),
-            "OpenAI-Project": self.project if self.project is not None else Omit(),
+            "NeoSpace-Organization": self.organization if self.organization is not None else Omit(),
+            "NeoSpace-Project": self.project if self.project is not None else Omit(),
             **self._custom_headers,
         }
 
@@ -260,7 +260,7 @@ class OpenAI(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=data)
 
 
-class AsyncOpenAI(AsyncAPIClient):
+class AsyncNeoSpace(AsyncAPIClient):
     completions: resources.AsyncCompletions
     chat: resources.AsyncChat
     embeddings: resources.AsyncEmbeddings
@@ -273,8 +273,8 @@ class AsyncOpenAI(AsyncAPIClient):
     beta: resources.AsyncBeta
     batches: resources.AsyncBatches
     uploads: resources.AsyncUploads
-    with_raw_response: AsyncOpenAIWithRawResponse
-    with_streaming_response: AsyncOpenAIWithStreamedResponse
+    with_raw_response: AsyncNeoSpaceWithRawResponse
+    with_streaming_response: AsyncNeoSpaceWithStreamedResponse
 
     # client options
     api_key: str
@@ -306,33 +306,33 @@ class AsyncOpenAI(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async openai client instance.
+        """Construct a new async neospace client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `OPENAI_API_KEY`
-        - `organization` from `OPENAI_ORG_ID`
-        - `project` from `OPENAI_PROJECT_ID`
+        - `api_key` from `NEOSPACE_API_KEY`
+        - `organization` from `NEOSPACE_ORG_ID`
+        - `project` from `NEOSPACE_PROJECT_ID`
         """
         if api_key is None:
-            api_key = os.environ.get("OPENAI_API_KEY")
+            api_key = os.environ.get("NEOSPACE_API_KEY")
         if api_key is None:
-            raise OpenAIError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable"
+            raise NeoSpaceError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the NEOSPACE_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if organization is None:
-            organization = os.environ.get("OPENAI_ORG_ID")
+            organization = os.environ.get("NEOSPACE_ORG_ID")
         self.organization = organization
 
         if project is None:
-            project = os.environ.get("OPENAI_PROJECT_ID")
+            project = os.environ.get("NEOSPACE_PROJECT_ID")
         self.project = project
 
         if base_url is None:
-            base_url = os.environ.get("OPENAI_BASE_URL")
+            base_url = os.environ.get("NEOSPACE_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.openai.com/v1"
+            base_url = f"https://api.neospace.com/v1"
 
         super().__init__(
             version=__version__,
@@ -359,8 +359,8 @@ class AsyncOpenAI(AsyncAPIClient):
         self.beta = resources.AsyncBeta(self)
         self.batches = resources.AsyncBatches(self)
         self.uploads = resources.AsyncUploads(self)
-        self.with_raw_response = AsyncOpenAIWithRawResponse(self)
-        self.with_streaming_response = AsyncOpenAIWithStreamedResponse(self)
+        self.with_raw_response = AsyncNeoSpaceWithRawResponse(self)
+        self.with_streaming_response = AsyncNeoSpaceWithStreamedResponse(self)
 
     @property
     @override
@@ -379,8 +379,8 @@ class AsyncOpenAI(AsyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": f"async:{get_async_library()}",
-            "OpenAI-Organization": self.organization if self.organization is not None else Omit(),
-            "OpenAI-Project": self.project if self.project is not None else Omit(),
+            "NeoSpace-Organization": self.organization if self.organization is not None else Omit(),
+            "NeoSpace-Project": self.project if self.project is not None else Omit(),
             **self._custom_headers,
         }
 
@@ -474,8 +474,8 @@ class AsyncOpenAI(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=data)
 
 
-class OpenAIWithRawResponse:
-    def __init__(self, client: OpenAI) -> None:
+class NeoSpaceWithRawResponse:
+    def __init__(self, client: NeoSpace) -> None:
         self.completions = resources.CompletionsWithRawResponse(client.completions)
         self.chat = resources.ChatWithRawResponse(client.chat)
         self.embeddings = resources.EmbeddingsWithRawResponse(client.embeddings)
@@ -490,8 +490,8 @@ class OpenAIWithRawResponse:
         self.uploads = resources.UploadsWithRawResponse(client.uploads)
 
 
-class AsyncOpenAIWithRawResponse:
-    def __init__(self, client: AsyncOpenAI) -> None:
+class AsyncNeoSpaceWithRawResponse:
+    def __init__(self, client: AsyncNeoSpace) -> None:
         self.completions = resources.AsyncCompletionsWithRawResponse(client.completions)
         self.chat = resources.AsyncChatWithRawResponse(client.chat)
         self.embeddings = resources.AsyncEmbeddingsWithRawResponse(client.embeddings)
@@ -506,8 +506,8 @@ class AsyncOpenAIWithRawResponse:
         self.uploads = resources.AsyncUploadsWithRawResponse(client.uploads)
 
 
-class OpenAIWithStreamedResponse:
-    def __init__(self, client: OpenAI) -> None:
+class NeoSpaceWithStreamedResponse:
+    def __init__(self, client: NeoSpace) -> None:
         self.completions = resources.CompletionsWithStreamingResponse(client.completions)
         self.chat = resources.ChatWithStreamingResponse(client.chat)
         self.embeddings = resources.EmbeddingsWithStreamingResponse(client.embeddings)
@@ -522,8 +522,8 @@ class OpenAIWithStreamedResponse:
         self.uploads = resources.UploadsWithStreamingResponse(client.uploads)
 
 
-class AsyncOpenAIWithStreamedResponse:
-    def __init__(self, client: AsyncOpenAI) -> None:
+class AsyncNeoSpaceWithStreamedResponse:
+    def __init__(self, client: AsyncNeoSpace) -> None:
         self.completions = resources.AsyncCompletionsWithStreamingResponse(client.completions)
         self.chat = resources.AsyncChatWithStreamingResponse(client.chat)
         self.embeddings = resources.AsyncEmbeddingsWithStreamingResponse(client.embeddings)
@@ -538,6 +538,6 @@ class AsyncOpenAIWithStreamedResponse:
         self.uploads = resources.AsyncUploadsWithStreamingResponse(client.uploads)
 
 
-Client = OpenAI
+Client = NeoSpace
 
-AsyncClient = AsyncOpenAI
+AsyncClient = AsyncNeoSpace

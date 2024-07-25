@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from typing_extensions import override
 
-import openai
-from openai import AssistantEventHandler
-from openai.types.beta import AssistantStreamEvent
-from openai.types.beta.threads import Text, TextDelta
-from openai.types.beta.threads.runs import RunStep, RunStepDelta
+import neospace
+from neospace import AssistantEventHandler
+from neospace.types.beta import AssistantStreamEvent
+from neospace.types.beta.threads import Text, TextDelta
+from neospace.types.beta.threads.runs import RunStep, RunStepDelta
 
 
 class EventHandler(AssistantEventHandler):
@@ -41,7 +41,7 @@ class EventHandler(AssistantEventHandler):
 
 
 def main() -> None:
-    client = openai.OpenAI()
+    client = neospace.NeoSpace()
 
     assistant = client.beta.assistants.create(
         name="Math Tutor",

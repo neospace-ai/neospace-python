@@ -8,14 +8,14 @@ from typing_extensions import override
 from . import types
 from ._types import NOT_GIVEN, NoneType, NotGiven, Transport, ProxiesTypes
 from ._utils import file_from_path
-from ._client import Client, OpenAI, Stream, Timeout, Transport, AsyncClient, AsyncOpenAI, AsyncStream, RequestOptions
+from ._client import Client, NeoSpace, Stream, Timeout, Transport, AsyncClient, AsyncNeoSpace, AsyncStream, RequestOptions
 from ._models import BaseModel
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
-    OpenAIError,
+    NeoSpaceError,
     ConflictError,
     NotFoundError,
     APIStatusError,
@@ -41,7 +41,7 @@ __all__ = [
     "ProxiesTypes",
     "NotGiven",
     "NOT_GIVEN",
-    "OpenAIError",
+    "NeoSpaceError",
     "APIError",
     "APIStatusError",
     "APITimeoutError",
@@ -61,8 +61,8 @@ __all__ = [
     "AsyncClient",
     "Stream",
     "AsyncStream",
-    "OpenAI",
-    "AsyncOpenAI",
+    "NeoSpace",
+    "AsyncNeoSpace",
     "file_from_path",
     "BaseModel",
     "DEFAULT_TIMEOUT",
@@ -74,7 +74,7 @@ __all__ = [
 
 from .lib import azure as _azure
 from .version import VERSION as VERSION
-from .lib.azure import AzureOpenAI as AzureOpenAI, AsyncAzureOpenAI as AsyncAzureOpenAI
+from .lib.azure import AzureNeoSpace as AzureNeoSpace, AsyncAzureNeoSpace as AsyncAzureNeoSpace
 from .lib._old_api import *
 from .lib.streaming import (
     AssistantEventHandler as AssistantEventHandler,
@@ -86,12 +86,12 @@ _setup_logging()
 # Update the __module__ attribute for exported symbols so that
 # error messages point to this module instead of the module
 # it was originally defined in, e.g.
-# openai._exceptions.NotFoundError -> openai.NotFoundError
+# neospace._exceptions.NotFoundError -> neospace.NotFoundError
 __locals = locals()
 for __name in __all__:
     if not __name.startswith("__"):
         try:
-            __locals[__name].__module__ = "openai"
+            __locals[__name].__module__ = "neospace"
         except (TypeError, AttributeError):
             # Some of our exported symbols are builtins which we can't set attributes for.
             pass
@@ -122,20 +122,20 @@ default_query: _t.Mapping[str, object] | None = None
 
 http_client: _httpx.Client | None = None
 
-_ApiType = _te.Literal["openai", "azure"]
+_ApiType = _te.Literal["neospace", "azure"]
 
-api_type: _ApiType | None = _t.cast(_ApiType, _os.environ.get("OPENAI_API_TYPE"))
+api_type: _ApiType | None = _t.cast(_ApiType, _os.environ.get("NEOSPACE_API_TYPE"))
 
-api_version: str | None = _os.environ.get("OPENAI_API_VERSION")
+api_version: str | None = _os.environ.get("NEOSPACE_API_VERSION")
 
-azure_endpoint: str | None = _os.environ.get("AZURE_OPENAI_ENDPOINT")
+azure_endpoint: str | None = _os.environ.get("AZURE_NEOSPACE_ENDPOINT")
 
-azure_ad_token: str | None = _os.environ.get("AZURE_OPENAI_AD_TOKEN")
+azure_ad_token: str | None = _os.environ.get("AZURE_NEOSPACE_AD_TOKEN")
 
 azure_ad_token_provider: _azure.AzureADTokenProvider | None = None
 
 
-class _ModuleClient(OpenAI):
+class _ModuleClient(NeoSpace):
     # Note: we have to use type: ignores here as overriding class members
     # with properties is technically unsafe but it is fine for our use case
 
@@ -240,68 +240,68 @@ class _ModuleClient(OpenAI):
         http_client = value
 
 
-class _AzureModuleClient(_ModuleClient, AzureOpenAI):  # type: ignore
+class _AzureModuleClient(_ModuleClient, AzureNeoSpace):  # type: ignore
     ...
 
 
-class _AmbiguousModuleClientUsageError(OpenAIError):
+class _AmbiguousModuleClientUsageError(NeoSpaceError):
     def __init__(self) -> None:
         super().__init__(
-            "Ambiguous use of module client; please set `openai.api_type` or the `OPENAI_API_TYPE` environment variable to `openai` or `azure`"
+            "Ambiguous use of module client; please set `neospace.api_type` or the `NEOSPACE_API_TYPE` environment variable to `neospace` or `azure`"
         )
 
 
-def _has_openai_credentials() -> bool:
-    return _os.environ.get("OPENAI_API_KEY") is not None
+def _has_neospace_credentials() -> bool:
+    return _os.environ.get("NEOSPACE_API_KEY") is not None
 
 
 def _has_azure_credentials() -> bool:
-    return azure_endpoint is not None or _os.environ.get("AZURE_OPENAI_API_KEY") is not None
+    return azure_endpoint is not None or _os.environ.get("AZURE_NEOSPACE_API_KEY") is not None
 
 
 def _has_azure_ad_credentials() -> bool:
     return (
-        _os.environ.get("AZURE_OPENAI_AD_TOKEN") is not None
+        _os.environ.get("AZURE_NEOSPACE_AD_TOKEN") is not None
         or azure_ad_token is not None
         or azure_ad_token_provider is not None
     )
 
 
-_client: OpenAI | None = None
+_client: NeoSpace | None = None
 
 
-def _load_client() -> OpenAI:  # type: ignore[reportUnusedFunction]
+def _load_client() -> NeoSpace:  # type: ignore[reportUnusedFunction]
     global _client
 
     if _client is None:
         global api_type, azure_endpoint, azure_ad_token, api_version
 
         if azure_endpoint is None:
-            azure_endpoint = _os.environ.get("AZURE_OPENAI_ENDPOINT")
+            azure_endpoint = _os.environ.get("AZURE_NEOSPACE_ENDPOINT")
 
         if azure_ad_token is None:
-            azure_ad_token = _os.environ.get("AZURE_OPENAI_AD_TOKEN")
+            azure_ad_token = _os.environ.get("AZURE_NEOSPACE_AD_TOKEN")
 
         if api_version is None:
-            api_version = _os.environ.get("OPENAI_API_VERSION")
+            api_version = _os.environ.get("NEOSPACE_API_VERSION")
 
         if api_type is None:
-            has_openai = _has_openai_credentials()
+            has_neospace = _has_neospace_credentials()
             has_azure = _has_azure_credentials()
             has_azure_ad = _has_azure_ad_credentials()
 
-            if has_openai and (has_azure or has_azure_ad):
+            if has_neospace and (has_azure or has_azure_ad):
                 raise _AmbiguousModuleClientUsageError()
 
             if (azure_ad_token is not None or azure_ad_token_provider is not None) and _os.environ.get(
-                "AZURE_OPENAI_API_KEY"
+                "AZURE_NEOSPACE_API_KEY"
             ) is not None:
                 raise _AmbiguousModuleClientUsageError()
 
             if has_azure or has_azure_ad:
                 api_type = "azure"
             else:
-                api_type = "openai"
+                api_type = "neospace"
 
         if api_type == "azure":
             _client = _AzureModuleClient(  # type: ignore

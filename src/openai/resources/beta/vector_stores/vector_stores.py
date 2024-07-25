@@ -85,7 +85,7 @@ class VectorStores(SyncAPIResource):
 
           expires_after: The expiration policy for a vector store.
 
-          file_ids: A list of [File](https://platform.openai.com/docs/api-reference/files) IDs that
+          file_ids: A list of [File](https://platform.neospace.com/docs/api-reference/files) IDs that
               the vector store should use. Useful for tools like `file_search` that can access
               files.
 
@@ -104,7 +104,7 @@ class VectorStores(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             "/vector_stores",
             body=maybe_transform(
@@ -148,7 +148,7 @@ class VectorStores(SyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get(
             f"/vector_stores/{vector_store_id}",
             options=make_request_options(
@@ -194,7 +194,7 @@ class VectorStores(SyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/vector_stores/{vector_store_id}",
             body=maybe_transform(
@@ -254,7 +254,7 @@ class VectorStores(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             "/vector_stores",
             page=SyncCursorPage[VectorStore],
@@ -301,7 +301,7 @@ class VectorStores(SyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._delete(
             f"/vector_stores/{vector_store_id}",
             options=make_request_options(
@@ -352,7 +352,7 @@ class AsyncVectorStores(AsyncAPIResource):
 
           expires_after: The expiration policy for a vector store.
 
-          file_ids: A list of [File](https://platform.openai.com/docs/api-reference/files) IDs that
+          file_ids: A list of [File](https://platform.neospace.com/docs/api-reference/files) IDs that
               the vector store should use. Useful for tools like `file_search` that can access
               files.
 
@@ -371,7 +371,7 @@ class AsyncVectorStores(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             "/vector_stores",
             body=await async_maybe_transform(
@@ -415,7 +415,7 @@ class AsyncVectorStores(AsyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._get(
             f"/vector_stores/{vector_store_id}",
             options=make_request_options(
@@ -461,7 +461,7 @@ class AsyncVectorStores(AsyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/vector_stores/{vector_store_id}",
             body=await async_maybe_transform(
@@ -521,7 +521,7 @@ class AsyncVectorStores(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             "/vector_stores",
             page=AsyncCursorPage[VectorStore],
@@ -568,7 +568,7 @@ class AsyncVectorStores(AsyncAPIResource):
         """
         if not vector_store_id:
             raise ValueError(f"Expected a non-empty value for `vector_store_id` but received {vector_store_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"NeoSpace-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._delete(
             f"/vector_stores/{vector_store_id}",
             options=make_request_options(

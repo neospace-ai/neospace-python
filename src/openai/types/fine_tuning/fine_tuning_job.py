@@ -61,7 +61,7 @@ class FineTuningJob(BaseModel):
     hyperparameters: Hyperparameters
     """The hyperparameters used for the fine-tuning job.
 
-    See the [fine-tuning guide](https://platform.openai.com/docs/guides/fine-tuning)
+    See the [fine-tuning guide](https://platform.neospace.com/docs/guides/fine-tuning)
     for more details.
     """
 
@@ -78,7 +78,7 @@ class FineTuningJob(BaseModel):
     """The compiled results file ID(s) for the fine-tuning job.
 
     You can retrieve the results with the
-    [Files API](https://platform.openai.com/docs/api-reference/files/retrieve-contents).
+    [Files API](https://platform.neospace.com/docs/api-reference/files/retrieve-contents).
     """
 
     seed: int
@@ -100,14 +100,14 @@ class FineTuningJob(BaseModel):
     """The file ID used for training.
 
     You can retrieve the training data with the
-    [Files API](https://platform.openai.com/docs/api-reference/files/retrieve-contents).
+    [Files API](https://platform.neospace.com/docs/api-reference/files/retrieve-contents).
     """
 
     validation_file: Optional[str] = None
     """The file ID used for validation.
 
     You can retrieve the validation results with the
-    [Files API](https://platform.openai.com/docs/api-reference/files/retrieve-contents).
+    [Files API](https://platform.neospace.com/docs/api-reference/files/retrieve-contents).
     """
 
     estimated_finish: Optional[int] = None

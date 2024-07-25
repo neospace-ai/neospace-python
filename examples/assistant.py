@@ -1,7 +1,7 @@
-import openai
+import neospace
 
-# gets API Key from environment variable OPENAI_API_KEY
-client = openai.OpenAI()
+# gets API Key from environment variable NEOSPACE_API_KEY
+client = neospace.NeoSpace()
 
 assistant = client.beta.assistants.create(
     name="Math Tutor",

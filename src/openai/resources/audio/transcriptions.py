@@ -70,7 +70,7 @@ class Transcriptions(SyncAPIResource):
 
           prompt: An optional text to guide the model's style or continue a previous audio
               segment. The
-              [prompt](https://platform.openai.com/docs/guides/speech-to-text/prompting)
+              [prompt](https://platform.neospace.com/docs/guides/speech-to-text/prompting)
               should match the audio language.
 
           response_format: The format of the transcript output, in one of these options: `json`, `text`,
@@ -166,7 +166,7 @@ class AsyncTranscriptions(AsyncAPIResource):
 
           prompt: An optional text to guide the model's style or continue a previous audio
               segment. The
-              [prompt](https://platform.openai.com/docs/guides/speech-to-text/prompting)
+              [prompt](https://platform.neospace.com/docs/guides/speech-to-text/prompting)
               should match the audio language.
 
           response_format: The format of the transcript output, in one of these options: `json`, `text`,

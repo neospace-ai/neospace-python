@@ -14,7 +14,7 @@ class SpeechCreateParams(TypedDict, total=False):
 
     model: Required[Union[str, Literal["tts-1", "tts-1-hd"]]]
     """
-    One of the available [TTS models](https://platform.openai.com/docs/models/tts):
+    One of the available [TTS models](https://platform.neospace.com/docs/models/tts):
     `tts-1` or `tts-1-hd`
     """
 
@@ -23,7 +23,7 @@ class SpeechCreateParams(TypedDict, total=False):
 
     Supported voices are `alloy`, `echo`, `fable`, `onyx`, `nova`, and `shimmer`.
     Previews of the voices are available in the
-    [Text to speech guide](https://platform.openai.com/docs/guides/text-to-speech/voice-options).
+    [Text to speech guide](https://platform.neospace.com/docs/guides/text-to-speech/voice-options).
     """
 
     response_format: Literal["mp3", "opus", "aac", "flac", "wav", "pcm"]

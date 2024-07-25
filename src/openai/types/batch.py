@@ -28,7 +28,7 @@ class Batch(BaseModel):
     """The Unix timestamp (in seconds) for when the batch was created."""
 
     endpoint: str
-    """The OpenAI API endpoint used by the batch."""
+    """The NeoSpace API endpoint used by the batch."""
 
     input_file_id: str
     """The ID of the input file for the batch."""

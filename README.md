@@ -1,25 +1,25 @@
-# OpenAI Python API library
+# NeoSpace Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/openai.svg)](https://pypi.org/project/openai/)
+[![PyPI version](https://img.shields.io/pypi/v/neospace.svg)](https://pypi.org/project/neospace/)
 
-The OpenAI Python library provides convenient access to the OpenAI REST API from any Python 3.7+
+The NeoSpace Python library provides convenient access to the NeoSpace REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated from our [OpenAPI specification](https://github.com/openai/openai-openapi) with [Stainless](https://stainlessapi.com/).
+It is generated from our [OpenAPI specification](https://github.com/neospace/neospace-openapi) with [Stainless](https://stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [platform.openai.com](https://platform.openai.com/docs). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [platform.neospace.com](https://platform.neospace.com/docs). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 > [!IMPORTANT]
-> The SDK was rewritten in v1, which was released November 6th 2023. See the [v1 migration guide](https://github.com/openai/openai-python/discussions/742), which includes scripts to automatically update your code.
+> The SDK was rewritten in v1, which was released November 6th 2023. See the [v1 migration guide](https://github.com/neospace/neospace-python/discussions/742), which includes scripts to automatically update your code.
 
 ```sh
 # install from PyPI
-pip install openai
+pip install neospace
 ```
 
 ## Usage
@@ -28,11 +28,11 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from openai import OpenAI
+from neospace import NeoSpace
 
-client = OpenAI(
+client = NeoSpace(
     # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
+    api_key=os.environ.get("NEOSPACE_API_KEY"),
 )
 
 chat_completion = client.chat.completions.create(
@@ -48,7 +48,7 @@ chat_completion = client.chat.completions.create(
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `OPENAI_API_KEY="My API Key"` to your `.env` file
+to add `NEOSPACE_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ### Polling Helpers
@@ -67,7 +67,7 @@ run = client.beta.threads.runs.create_and_poll(
 )
 ```
 
-More information on the lifecycle of a Run can be found in the [Run Lifecycle Documentation](https://platform.openai.com/docs/assistants/how-it-works/run-lifecycle)
+More information on the lifecycle of a Run can be found in the [Run Lifecycle Documentation](https://platform.neospace.com/docs/assistants/how-it-works/run-lifecycle)
 
 ### Bulk Upload Helpers
 
@@ -103,16 +103,16 @@ More information on streaming helpers can be found in the dedicated documentatio
 
 ## Async usage
 
-Simply import `AsyncOpenAI` instead of `OpenAI` and use `await` with each API call:
+Simply import `AsyncNeoSpace` instead of `NeoSpace` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from openai import AsyncOpenAI
+from neospace import AsyncNeoSpace
 
-client = AsyncOpenAI(
+client = AsyncNeoSpace(
     # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
+    api_key=os.environ.get("NEOSPACE_API_KEY"),
 )
 
 
@@ -138,9 +138,9 @@ Functionality between the synchronous and asynchronous clients is otherwise iden
 We provide support for streaming responses using Server Side Events (SSE).
 
 ```python
-from openai import OpenAI
+from neospace import NeoSpace
 
-client = OpenAI()
+client = NeoSpace()
 
 stream = client.chat.completions.create(
     model="gpt-4",
@@ -154,9 +154,9 @@ for chunk in stream:
 The async client uses the exact same interface.
 
 ```python
-from openai import AsyncOpenAI
+from neospace import AsyncNeoSpace
 
-client = AsyncOpenAI()
+client = AsyncNeoSpace()
 
 
 async def main():
@@ -180,16 +180,16 @@ asyncio.run(main())
 We also expose a global client instance that is accessible in a similar fashion to versions prior to v1.
 
 ```py
-import openai
+import neospace
 
-# optional; defaults to `os.environ['OPENAI_API_KEY']`
-openai.api_key = '...'
+# optional; defaults to `os.environ['NEOSPACE_API_KEY']`
+neospace.api_key = '...'
 
-# all client options can be configured just like the `OpenAI` instantiation counterpart
-openai.base_url = "https://..."
-openai.default_headers = {"x-foo": "true"}
+# all client options can be configured just like the `NeoSpace` instantiation counterpart
+neospace.base_url = "https://..."
+neospace.default_headers = {"x-foo": "true"}
 
-completion = openai.chat.completions.create(
+completion = neospace.chat.completions.create(
     model="gpt-4",
     messages=[
         {
@@ -205,7 +205,7 @@ The API is the exact same as the standard client instance-based API.
 
 This is intended to be used within REPLs or notebooks for faster iteration, **not** in application code.
 
-We recommend that you always instantiate a client (e.g., with `client = OpenAI()`) in application code because:
+We recommend that you always instantiate a client (e.g., with `client = NeoSpace()`) in application code because:
 
 - It can be difficult to reason about where client options are configured
 - It's not possible to change certain client options without potentially causing race conditions
@@ -223,14 +223,14 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## Pagination
 
-List methods in the OpenAI API are paginated.
+List methods in the NeoSpace API are paginated.
 
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
 ```python
-from openai import OpenAI
+from neospace import NeoSpace
 
-client = OpenAI()
+client = NeoSpace()
 
 all_jobs = []
 # Automatically fetches more pages as needed.
@@ -246,9 +246,9 @@ Or, asynchronously:
 
 ```python
 import asyncio
-from openai import AsyncOpenAI
+from neospace import AsyncNeoSpace
 
-client = AsyncOpenAI()
+client = AsyncNeoSpace()
 
 
 async def main() -> None:
@@ -297,9 +297,9 @@ for job in first_page.data:
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from openai import OpenAI
+from neospace import NeoSpace
 
-client = OpenAI()
+client = NeoSpace()
 
 completion = client.chat.completions.create(
     messages=[
@@ -319,9 +319,9 @@ Request parameters that correspond to file uploads can be passed as `bytes`, a [
 
 ```python
 from pathlib import Path
-from openai import OpenAI
+from neospace import NeoSpace
 
-client = OpenAI()
+client = NeoSpace()
 
 client.files.create(
     file=Path("input.jsonl"),
@@ -333,30 +333,30 @@ The async client uses the exact same interface. If you pass a [`PathLike`](https
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `openai.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `neospace.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `openai.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `neospace.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `openai.APIError`.
+All errors inherit from `neospace.APIError`.
 
 ```python
-import openai
-from openai import OpenAI
+import neospace
+from neospace import NeoSpace
 
-client = OpenAI()
+client = NeoSpace()
 
 try:
     client.fine_tuning.jobs.create(
         model="gpt-3.5-turbo",
         training_file="file-abc123",
     )
-except openai.APIConnectionError as e:
+except neospace.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except openai.RateLimitError as e:
+except neospace.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except openai.APIStatusError as e:
+except neospace.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -384,10 +384,10 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from openai import OpenAI
+from neospace import NeoSpace
 
 # Configure the default for all requests:
-client = OpenAI(
+client = NeoSpace(
     # default is 2
     max_retries=0,
 )
@@ -410,16 +410,16 @@ By default requests time out after 10 minutes. You can configure this with a `ti
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from openai import OpenAI
+from neospace import NeoSpace
 
 # Configure the default for all requests:
-client = OpenAI(
+client = NeoSpace(
     # 20 seconds (default is 10 minutes)
     timeout=20.0,
 )
 
 # More granular control:
-client = OpenAI(
+client = NeoSpace(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -445,10 +445,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `OPENAI_LOG` to `debug`.
+You can enable logging by setting the environment variable `NEOSPACE_LOG` to `debug`.
 
 ```shell
-$ export OPENAI_LOG=debug
+$ export NEOSPACE_LOG=debug
 ```
 
 ### How to tell whether `None` means `null` or missing
@@ -468,9 +468,9 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from openai import OpenAI
+from neospace import NeoSpace
 
-client = OpenAI()
+client = NeoSpace()
 response = client.chat.completions.with_raw_response.create(
     messages=[{
         "role": "user",
@@ -484,7 +484,7 @@ completion = response.parse()  # get the object that `chat.completions.create()`
 print(completion)
 ```
 
-These methods return an [`LegacyAPIResponse`](https://github.com/openai/openai-python/tree/main/src/openai/_legacy_response.py) object. This is a legacy class as we're changing it slightly in the next major version.
+These methods return an [`LegacyAPIResponse`](https://github.com/neospace/neospace-python/tree/main/src/neospace/_legacy_response.py) object. This is a legacy class as we're changing it slightly in the next major version.
 
 For the sync client this will mostly be the same with the exception
 of `content` & `text` will be methods instead of properties. In the
@@ -499,7 +499,7 @@ The above interface eagerly reads the full response body when you make the reque
 
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
-As such, `.with_streaming_response` methods return a different [`APIResponse`](https://github.com/openai/openai-python/tree/main/src/openai/_response.py) object, and the async client returns an [`AsyncAPIResponse`](https://github.com/openai/openai-python/tree/main/src/openai/_response.py) object.
+As such, `.with_streaming_response` methods return a different [`APIResponse`](https://github.com/neospace/neospace-python/tree/main/src/neospace/_response.py) object, and the async client returns an [`AsyncAPIResponse`](https://github.com/neospace/neospace-python/tree/main/src/neospace/_response.py) object.
 
 ```python
 with client.chat.completions.with_streaming_response.create(
@@ -563,10 +563,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
-from openai import OpenAI, DefaultHttpxClient
+from neospace import NeoSpace, DefaultHttpxClient
 
-client = OpenAI(
-    # Or use the `OPENAI_BASE_URL` env var
+client = NeoSpace(
+    # Or use the `NEOSPACE_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxies="http://my.test.proxy.example.com",
@@ -585,24 +585,24 @@ client.with_options(http_client=DefaultHttpxClient(...))
 
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
-## Microsoft Azure OpenAI
+## Microsoft Azure NeoSpace
 
-To use this library with [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/overview), use the `AzureOpenAI`
-class instead of the `OpenAI` class.
+To use this library with [Azure NeoSpace](https://learn.microsoft.com/azure/ai-services/neospace/overview), use the `AzureNeoSpace`
+class instead of the `NeoSpace` class.
 
 > [!IMPORTANT]
 > The Azure API shape differs from the core API shape which means that the static types for responses / params
 > won't always be correct.
 
 ```py
-from openai import AzureOpenAI
+from neospace import AzureNeoSpace
 
-# gets the API Key from environment variable AZURE_OPENAI_API_KEY
-client = AzureOpenAI(
-    # https://learn.microsoft.com/azure/ai-services/openai/reference#rest-api-versioning
+# gets the API Key from environment variable AZURE_NEOSPACE_API_KEY
+client = AzureNeoSpace(
+    # https://learn.microsoft.com/azure/ai-services/neospace/reference#rest-api-versioning
     api_version="2023-07-01-preview",
-    # https://learn.microsoft.com/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal#create-a-resource
-    azure_endpoint="https://example-endpoint.openai.azure.com",
+    # https://learn.microsoft.com/azure/cognitive-services/neospace/how-to/create-resource?pivots=web-portal#create-a-resource
+    azure_endpoint="https://example-endpoint.neospace.azure.com",
 )
 
 completion = client.chat.completions.create(
@@ -617,15 +617,15 @@ completion = client.chat.completions.create(
 print(completion.to_json())
 ```
 
-In addition to the options provided in the base `OpenAI` client, the following options are provided:
+In addition to the options provided in the base `NeoSpace` client, the following options are provided:
 
-- `azure_endpoint` (or the `AZURE_OPENAI_ENDPOINT` environment variable)
+- `azure_endpoint` (or the `AZURE_NEOSPACE_ENDPOINT` environment variable)
 - `azure_deployment`
-- `api_version` (or the `OPENAI_API_VERSION` environment variable)
-- `azure_ad_token` (or the `AZURE_OPENAI_AD_TOKEN` environment variable)
+- `api_version` (or the `NEOSPACE_API_VERSION` environment variable)
+- `azure_ad_token` (or the `AZURE_NEOSPACE_AD_TOKEN` environment variable)
 - `azure_ad_token_provider`
 
-An example of using the client with Microsoft Entra ID (formerly known as Azure Active Directory) can be found [here](https://github.com/openai/openai-python/blob/main/examples/azure_ad.py).
+An example of using the client with Microsoft Entra ID (formerly known as Azure Active Directory) can be found [here](https://github.com/neospace/neospace-python/blob/main/examples/azure_ad.py).
 
 ## Versioning
 
@@ -637,7 +637,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/openai/openai-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/neospace/neospace-python/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
