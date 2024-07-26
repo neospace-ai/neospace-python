@@ -5,8 +5,8 @@ name: Python package
 
 on:  
   push:
-    tags:
-      - '*'
+    branches:
+      - main
 
 jobs:
   release:
@@ -37,7 +37,7 @@ jobs:
       with:
         artifacts: "dist/*"
         artifactContentType: "application/zip"
-        name: "Release ${{ github.ref_name }}"
+        name: "Release main"
         prerelease: "true"
-        tag: ${{ github.ref }}
+        tag: "v.1.0.0-beta"
               
