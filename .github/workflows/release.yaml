@@ -38,5 +38,6 @@ jobs:
         artifacts: "dist/*"
         artifactContentType: "application/zip"
         name: "Release ${{ github.ref_name }}"
-        prerelease: "true" 
+        prerelease: "true"
+        tag: ${{ github.ref }}
               
