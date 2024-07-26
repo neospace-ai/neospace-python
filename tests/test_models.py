@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from openai._utils import PropertyInfo
-from openai._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from openai._models import BaseModel, construct_type
+from neospace._utils import PropertyInfo
+from neospace._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from neospace._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

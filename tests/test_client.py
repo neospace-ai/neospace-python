@@ -16,12 +16,12 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from openai import OpenAI, AsyncOpenAI, APIResponseValidationError
-from openai._models import BaseModel, FinalRequestOptions
-from openai._constants import RAW_RESPONSE_HEADER
-from openai._streaming import Stream, AsyncStream
-from openai._exceptions import OpenAIError, APIStatusError, APITimeoutError, APIResponseValidationError
-from openai._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
+from neospace import NeoSpace, AsyncNeoSpace, APIResponseValidationError
+from neospace._models import BaseModel, FinalRequestOptions
+from neospace._constants import RAW_RESPONSE_HEADER
+from neospace._streaming import Stream, AsyncStream
+from neospace._exceptions import NeoSpaceError, APIStatusError, APITimeoutError, APIResponseValidationError
+from neospace._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
 
 from .utils import update_env
 
@@ -39,7 +39,7 @@ def _low_retry_timeout(*_args: Any, **_kwargs: Any) -> float:
     return 0.1
 
 
-def _get_open_connections(client: OpenAI | AsyncOpenAI) -> int:
+def _get_open_connections(client: NeoSpace | AsyncNeoSpace) -> int:
     transport = client._client._transport
     assert isinstance(transport, httpx.HTTPTransport) or isinstance(transport, httpx.AsyncHTTPTransport)
 
@@ -47,8 +47,8 @@ def _get_open_connections(client: OpenAI | AsyncOpenAI) -> int:
     return len(pool._requests)
 
 
-class TestOpenAI:
-    client = OpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+class TestNeoSpace:
+    client = NeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -95,7 +95,7 @@ class TestOpenAI:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = OpenAI(
+        client = NeoSpace(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -129,7 +129,7 @@ class TestOpenAI:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = OpenAI(
+        client = NeoSpace(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -220,10 +220,10 @@ class TestOpenAI:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "openai/_legacy_response.py",
-                        "openai/_response.py",
+                        "neospace/_legacy_response.py",
+                        "neospace/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "openai/_compat.py",
+                        "neospace/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -254,7 +254,9 @@ class TestOpenAI:
         assert timeout == httpx.Timeout(100.0)
 
     def test_client_timeout_option(self) -> None:
-        client = OpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0))
+        client = NeoSpace(
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
+        )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -263,7 +265,7 @@ class TestOpenAI:
     def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
-            client = OpenAI(
+            client = NeoSpace(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -273,7 +275,7 @@ class TestOpenAI:
 
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
-            client = OpenAI(
+            client = NeoSpace(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -283,7 +285,7 @@ class TestOpenAI:
 
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = OpenAI(
+            client = NeoSpace(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -294,7 +296,7 @@ class TestOpenAI:
     async def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             async with httpx.AsyncClient() as http_client:
-                OpenAI(
+                NeoSpace(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -302,14 +304,14 @@ class TestOpenAI:
                 )
 
     def test_default_headers_option(self) -> None:
-        client = OpenAI(
+        client = NeoSpace(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = OpenAI(
+        client2 = NeoSpace(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -323,16 +325,16 @@ class TestOpenAI:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = OpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = NeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with pytest.raises(OpenAIError):
-            client2 = OpenAI(base_url=base_url, api_key=None, _strict_response_validation=True)
+        with pytest.raises(NeoSpaceError):
+            client2 = NeoSpace(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
-        client = OpenAI(
+        client = NeoSpace(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -446,7 +448,7 @@ class TestOpenAI:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, client: OpenAI) -> None:
+    def test_multipart_repeating_array(self, client: NeoSpace) -> None:
         request = client._build_request(
             FinalRequestOptions.construct(
                 method="get",
@@ -533,7 +535,7 @@ class TestOpenAI:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = OpenAI(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
+        client = NeoSpace(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -541,15 +543,15 @@ class TestOpenAI:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(OPENAI_BASE_URL="http://localhost:5000/from/env"):
-            client = OpenAI(api_key=api_key, _strict_response_validation=True)
+        with update_env(NEOSPACE_BASE_URL="http://localhost:5000/from/env"):
+            client = NeoSpace(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
-            OpenAI(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
-            OpenAI(
+            NeoSpace(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            NeoSpace(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -558,7 +560,7 @@ class TestOpenAI:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: OpenAI) -> None:
+    def test_base_url_trailing_slash(self, client: NeoSpace) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -571,8 +573,8 @@ class TestOpenAI:
     @pytest.mark.parametrize(
         "client",
         [
-            OpenAI(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
-            OpenAI(
+            NeoSpace(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            NeoSpace(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -581,7 +583,7 @@ class TestOpenAI:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: OpenAI) -> None:
+    def test_base_url_no_trailing_slash(self, client: NeoSpace) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -594,8 +596,8 @@ class TestOpenAI:
     @pytest.mark.parametrize(
         "client",
         [
-            OpenAI(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
-            OpenAI(
+            NeoSpace(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            NeoSpace(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -604,7 +606,7 @@ class TestOpenAI:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: OpenAI) -> None:
+    def test_absolute_request_url(self, client: NeoSpace) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -615,7 +617,7 @@ class TestOpenAI:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = OpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = NeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -626,7 +628,7 @@ class TestOpenAI:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = OpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = NeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -647,7 +649,7 @@ class TestOpenAI:
 
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            OpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None))
+            NeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None))
 
     @pytest.mark.respx(base_url=base_url)
     def test_default_stream_cls(self, respx_mock: MockRouter) -> None:
@@ -667,12 +669,12 @@ class TestOpenAI:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = OpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = NeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = OpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = NeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -699,14 +701,14 @@ class TestOpenAI:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = OpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = NeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("openai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("neospace._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/chat/completions").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -723,7 +725,7 @@ class TestOpenAI:
                                 "content": "Say this is a test",
                             }
                         ],
-                        model="gpt-3.5-turbo",
+                        model="7b-r16_lora_full_constrained",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -732,7 +734,7 @@ class TestOpenAI:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("openai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("neospace._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/chat/completions").mock(return_value=httpx.Response(500))
@@ -749,7 +751,7 @@ class TestOpenAI:
                                 "content": "Say this is a test",
                             }
                         ],
-                        model="gpt-3.5-turbo",
+                        model="7b-r16_lora_full_constrained",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -759,8 +761,8 @@ class TestOpenAI:
         assert _get_open_connections(self.client) == 0
 
 
-class TestAsyncOpenAI:
-    client = AsyncOpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+class TestAsyncNeoSpace:
+    client = AsyncNeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -809,7 +811,7 @@ class TestAsyncOpenAI:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = AsyncOpenAI(
+        client = AsyncNeoSpace(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -843,7 +845,7 @@ class TestAsyncOpenAI:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = AsyncOpenAI(
+        client = AsyncNeoSpace(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -934,10 +936,10 @@ class TestAsyncOpenAI:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "openai/_legacy_response.py",
-                        "openai/_response.py",
+                        "neospace/_legacy_response.py",
+                        "neospace/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "openai/_compat.py",
+                        "neospace/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -968,7 +970,7 @@ class TestAsyncOpenAI:
         assert timeout == httpx.Timeout(100.0)
 
     async def test_client_timeout_option(self) -> None:
-        client = AsyncOpenAI(
+        client = AsyncNeoSpace(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
@@ -979,7 +981,7 @@ class TestAsyncOpenAI:
     async def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
-            client = AsyncOpenAI(
+            client = AsyncNeoSpace(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -989,7 +991,7 @@ class TestAsyncOpenAI:
 
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
-            client = AsyncOpenAI(
+            client = AsyncNeoSpace(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -999,7 +1001,7 @@ class TestAsyncOpenAI:
 
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = AsyncOpenAI(
+            client = AsyncNeoSpace(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1010,7 +1012,7 @@ class TestAsyncOpenAI:
     def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             with httpx.Client() as http_client:
-                AsyncOpenAI(
+                AsyncNeoSpace(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -1018,14 +1020,14 @@ class TestAsyncOpenAI:
                 )
 
     def test_default_headers_option(self) -> None:
-        client = AsyncOpenAI(
+        client = AsyncNeoSpace(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = AsyncOpenAI(
+        client2 = AsyncNeoSpace(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -1039,16 +1041,16 @@ class TestAsyncOpenAI:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = AsyncOpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncNeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with pytest.raises(OpenAIError):
-            client2 = AsyncOpenAI(base_url=base_url, api_key=None, _strict_response_validation=True)
+        with pytest.raises(NeoSpaceError):
+            client2 = AsyncNeoSpace(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
-        client = AsyncOpenAI(
+        client = AsyncNeoSpace(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1162,7 +1164,7 @@ class TestAsyncOpenAI:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, async_client: AsyncOpenAI) -> None:
+    def test_multipart_repeating_array(self, async_client: AsyncNeoSpace) -> None:
         request = async_client._build_request(
             FinalRequestOptions.construct(
                 method="get",
@@ -1249,7 +1251,7 @@ class TestAsyncOpenAI:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = AsyncOpenAI(
+        client = AsyncNeoSpace(
             base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
@@ -1259,17 +1261,17 @@ class TestAsyncOpenAI:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(OPENAI_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncOpenAI(api_key=api_key, _strict_response_validation=True)
+        with update_env(NEOSPACE_BASE_URL="http://localhost:5000/from/env"):
+            client = AsyncNeoSpace(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncOpenAI(
+            AsyncNeoSpace(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncOpenAI(
+            AsyncNeoSpace(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1278,7 +1280,7 @@ class TestAsyncOpenAI:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: AsyncOpenAI) -> None:
+    def test_base_url_trailing_slash(self, client: AsyncNeoSpace) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1291,10 +1293,10 @@ class TestAsyncOpenAI:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncOpenAI(
+            AsyncNeoSpace(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncOpenAI(
+            AsyncNeoSpace(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1303,7 +1305,7 @@ class TestAsyncOpenAI:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: AsyncOpenAI) -> None:
+    def test_base_url_no_trailing_slash(self, client: AsyncNeoSpace) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1316,10 +1318,10 @@ class TestAsyncOpenAI:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncOpenAI(
+            AsyncNeoSpace(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncOpenAI(
+            AsyncNeoSpace(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1328,7 +1330,7 @@ class TestAsyncOpenAI:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: AsyncOpenAI) -> None:
+    def test_absolute_request_url(self, client: AsyncNeoSpace) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1339,7 +1341,7 @@ class TestAsyncOpenAI:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncOpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncNeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1351,7 +1353,7 @@ class TestAsyncOpenAI:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncOpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncNeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1373,7 +1375,7 @@ class TestAsyncOpenAI:
 
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            AsyncOpenAI(
+            AsyncNeoSpace(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
@@ -1397,12 +1399,12 @@ class TestAsyncOpenAI:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncOpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = AsyncNeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncOpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = AsyncNeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1430,14 +1432,14 @@ class TestAsyncOpenAI:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncOpenAI(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncNeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("openai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("neospace._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/chat/completions").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -1454,7 +1456,7 @@ class TestAsyncOpenAI:
                                 "content": "Say this is a test",
                             }
                         ],
-                        model="gpt-3.5-turbo",
+                        model="7b-r16_lora_full_constrained",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1463,7 +1465,7 @@ class TestAsyncOpenAI:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("openai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("neospace._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/chat/completions").mock(return_value=httpx.Response(500))
@@ -1480,7 +1482,7 @@ class TestAsyncOpenAI:
                                 "content": "Say this is a test",
                             }
                         ],
-                        model="gpt-3.5-turbo",
+                        model="7b-r16_lora_full_constrained",
                     ),
                 ),
                 cast_to=httpx.Response,

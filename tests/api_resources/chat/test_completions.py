@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from openai import OpenAI, AsyncOpenAI
+from neospace import NeoSpace, AsyncNeoSpace
 from tests.utils import assert_matches_type
-from openai.types.chat import (
+from neospace.types.chat import (
     ChatCompletion,
 )
 
@@ -20,7 +20,7 @@ class TestCompletions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_create_overload_1(self, client: OpenAI) -> None:
+    def test_method_create_overload_1(self, client: NeoSpace) -> None:
         completion = client.chat.completions.create(
             messages=[
                 {
@@ -28,12 +28,12 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params_overload_1(self, client: OpenAI) -> None:
+    def test_method_create_with_all_params_overload_1(self, client: NeoSpace) -> None:
         completion = client.chat.completions.create(
             messages=[
                 {
@@ -42,7 +42,7 @@ class TestCompletions:
                     "name": "string",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             frequency_penalty=-2,
             function_call="none",
             functions=[
@@ -99,7 +99,7 @@ class TestCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    def test_raw_response_create_overload_1(self, client: OpenAI) -> None:
+    def test_raw_response_create_overload_1(self, client: NeoSpace) -> None:
         response = client.chat.completions.with_raw_response.create(
             messages=[
                 {
@@ -107,7 +107,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
 
         assert response.is_closed is True
@@ -116,7 +116,7 @@ class TestCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    def test_streaming_response_create_overload_1(self, client: OpenAI) -> None:
+    def test_streaming_response_create_overload_1(self, client: NeoSpace) -> None:
         with client.chat.completions.with_streaming_response.create(
             messages=[
                 {
@@ -124,7 +124,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -135,7 +135,7 @@ class TestCompletions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_create_overload_2(self, client: OpenAI) -> None:
+    def test_method_create_overload_2(self, client: NeoSpace) -> None:
         completion_stream = client.chat.completions.create(
             messages=[
                 {
@@ -143,13 +143,13 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         )
         completion_stream.response.close()
 
     @parametrize
-    def test_method_create_with_all_params_overload_2(self, client: OpenAI) -> None:
+    def test_method_create_with_all_params_overload_2(self, client: NeoSpace) -> None:
         completion_stream = client.chat.completions.create(
             messages=[
                 {
@@ -158,7 +158,7 @@ class TestCompletions:
                     "name": "string",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
             frequency_penalty=-2,
             function_call="none",
@@ -215,7 +215,7 @@ class TestCompletions:
         completion_stream.response.close()
 
     @parametrize
-    def test_raw_response_create_overload_2(self, client: OpenAI) -> None:
+    def test_raw_response_create_overload_2(self, client: NeoSpace) -> None:
         response = client.chat.completions.with_raw_response.create(
             messages=[
                 {
@@ -223,7 +223,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         )
 
@@ -232,7 +232,7 @@ class TestCompletions:
         stream.close()
 
     @parametrize
-    def test_streaming_response_create_overload_2(self, client: OpenAI) -> None:
+    def test_streaming_response_create_overload_2(self, client: NeoSpace) -> None:
         with client.chat.completions.with_streaming_response.create(
             messages=[
                 {
@@ -240,7 +240,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         ) as response:
             assert not response.is_closed
@@ -256,7 +256,7 @@ class TestAsyncCompletions:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_create_overload_1(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create_overload_1(self, async_client: AsyncNeoSpace) -> None:
         completion = await async_client.chat.completions.create(
             messages=[
                 {
@@ -264,12 +264,12 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncNeoSpace) -> None:
         completion = await async_client.chat.completions.create(
             messages=[
                 {
@@ -278,7 +278,7 @@ class TestAsyncCompletions:
                     "name": "string",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             frequency_penalty=-2,
             function_call="none",
             functions=[
@@ -335,7 +335,7 @@ class TestAsyncCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    async def test_raw_response_create_overload_1(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_create_overload_1(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.chat.completions.with_raw_response.create(
             messages=[
                 {
@@ -343,7 +343,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         )
 
         assert response.is_closed is True
@@ -352,7 +352,7 @@ class TestAsyncCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create_overload_1(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.chat.completions.with_streaming_response.create(
             messages=[
                 {
@@ -360,7 +360,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -371,7 +371,7 @@ class TestAsyncCompletions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_create_overload_2(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create_overload_2(self, async_client: AsyncNeoSpace) -> None:
         completion_stream = await async_client.chat.completions.create(
             messages=[
                 {
@@ -379,13 +379,13 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         )
         await completion_stream.response.aclose()
 
     @parametrize
-    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncNeoSpace) -> None:
         completion_stream = await async_client.chat.completions.create(
             messages=[
                 {
@@ -394,7 +394,7 @@ class TestAsyncCompletions:
                     "name": "string",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
             frequency_penalty=-2,
             function_call="none",
@@ -451,7 +451,7 @@ class TestAsyncCompletions:
         await completion_stream.response.aclose()
 
     @parametrize
-    async def test_raw_response_create_overload_2(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_create_overload_2(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.chat.completions.with_raw_response.create(
             messages=[
                 {
@@ -459,7 +459,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         )
 
@@ -468,7 +468,7 @@ class TestAsyncCompletions:
         await stream.close()
 
     @parametrize
-    async def test_streaming_response_create_overload_2(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.chat.completions.with_streaming_response.create(
             messages=[
                 {
@@ -476,7 +476,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="gpt-4-turbo",
+            model="7b-r16_lora_full_constrained-turbo",
             stream=True,
         ) as response:
             assert not response.is_closed

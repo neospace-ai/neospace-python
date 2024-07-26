@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
-from openai import OpenAI, AsyncOpenAI
+from neospace import NeoSpace, AsyncNeoSpace
 from tests.utils import assert_matches_type
-from openai.pagination import SyncCursorPage, AsyncCursorPage
-from openai.types.beta import (
+from neospace.pagination import SyncCursorPage, AsyncCursorPage
+from neospace.types.beta import (
     VectorStore,
     VectorStoreDeleted,
 )
@@ -22,12 +22,12 @@ class TestVectorStores:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_create(self, client: OpenAI) -> None:
+    def test_method_create(self, client: NeoSpace) -> None:
         vector_store = client.beta.vector_stores.create()
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params(self, client: OpenAI) -> None:
+    def test_method_create_with_all_params(self, client: NeoSpace) -> None:
         vector_store = client.beta.vector_stores.create(
             chunking_strategy={"type": "auto"},
             expires_after={
@@ -41,7 +41,7 @@ class TestVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    def test_raw_response_create(self, client: OpenAI) -> None:
+    def test_raw_response_create(self, client: NeoSpace) -> None:
         response = client.beta.vector_stores.with_raw_response.create()
 
         assert response.is_closed is True
@@ -50,7 +50,7 @@ class TestVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    def test_streaming_response_create(self, client: OpenAI) -> None:
+    def test_streaming_response_create(self, client: NeoSpace) -> None:
         with client.beta.vector_stores.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -61,14 +61,14 @@ class TestVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_retrieve(self, client: OpenAI) -> None:
+    def test_method_retrieve(self, client: NeoSpace) -> None:
         vector_store = client.beta.vector_stores.retrieve(
             "string",
         )
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    def test_raw_response_retrieve(self, client: OpenAI) -> None:
+    def test_raw_response_retrieve(self, client: NeoSpace) -> None:
         response = client.beta.vector_stores.with_raw_response.retrieve(
             "string",
         )
@@ -79,7 +79,7 @@ class TestVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    def test_streaming_response_retrieve(self, client: OpenAI) -> None:
+    def test_streaming_response_retrieve(self, client: NeoSpace) -> None:
         with client.beta.vector_stores.with_streaming_response.retrieve(
             "string",
         ) as response:
@@ -92,21 +92,21 @@ class TestVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: OpenAI) -> None:
+    def test_path_params_retrieve(self, client: NeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `vector_store_id` but received ''"):
             client.beta.vector_stores.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
-    def test_method_update(self, client: OpenAI) -> None:
+    def test_method_update(self, client: NeoSpace) -> None:
         vector_store = client.beta.vector_stores.update(
             "string",
         )
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    def test_method_update_with_all_params(self, client: OpenAI) -> None:
+    def test_method_update_with_all_params(self, client: NeoSpace) -> None:
         vector_store = client.beta.vector_stores.update(
             "string",
             expires_after={
@@ -119,7 +119,7 @@ class TestVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    def test_raw_response_update(self, client: OpenAI) -> None:
+    def test_raw_response_update(self, client: NeoSpace) -> None:
         response = client.beta.vector_stores.with_raw_response.update(
             "string",
         )
@@ -130,7 +130,7 @@ class TestVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    def test_streaming_response_update(self, client: OpenAI) -> None:
+    def test_streaming_response_update(self, client: NeoSpace) -> None:
         with client.beta.vector_stores.with_streaming_response.update(
             "string",
         ) as response:
@@ -143,19 +143,19 @@ class TestVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_update(self, client: OpenAI) -> None:
+    def test_path_params_update(self, client: NeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `vector_store_id` but received ''"):
             client.beta.vector_stores.with_raw_response.update(
                 "",
             )
 
     @parametrize
-    def test_method_list(self, client: OpenAI) -> None:
+    def test_method_list(self, client: NeoSpace) -> None:
         vector_store = client.beta.vector_stores.list()
         assert_matches_type(SyncCursorPage[VectorStore], vector_store, path=["response"])
 
     @parametrize
-    def test_method_list_with_all_params(self, client: OpenAI) -> None:
+    def test_method_list_with_all_params(self, client: NeoSpace) -> None:
         vector_store = client.beta.vector_stores.list(
             after="string",
             before="string",
@@ -165,7 +165,7 @@ class TestVectorStores:
         assert_matches_type(SyncCursorPage[VectorStore], vector_store, path=["response"])
 
     @parametrize
-    def test_raw_response_list(self, client: OpenAI) -> None:
+    def test_raw_response_list(self, client: NeoSpace) -> None:
         response = client.beta.vector_stores.with_raw_response.list()
 
         assert response.is_closed is True
@@ -174,7 +174,7 @@ class TestVectorStores:
         assert_matches_type(SyncCursorPage[VectorStore], vector_store, path=["response"])
 
     @parametrize
-    def test_streaming_response_list(self, client: OpenAI) -> None:
+    def test_streaming_response_list(self, client: NeoSpace) -> None:
         with client.beta.vector_stores.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -185,14 +185,14 @@ class TestVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_delete(self, client: OpenAI) -> None:
+    def test_method_delete(self, client: NeoSpace) -> None:
         vector_store = client.beta.vector_stores.delete(
             "string",
         )
         assert_matches_type(VectorStoreDeleted, vector_store, path=["response"])
 
     @parametrize
-    def test_raw_response_delete(self, client: OpenAI) -> None:
+    def test_raw_response_delete(self, client: NeoSpace) -> None:
         response = client.beta.vector_stores.with_raw_response.delete(
             "string",
         )
@@ -203,7 +203,7 @@ class TestVectorStores:
         assert_matches_type(VectorStoreDeleted, vector_store, path=["response"])
 
     @parametrize
-    def test_streaming_response_delete(self, client: OpenAI) -> None:
+    def test_streaming_response_delete(self, client: NeoSpace) -> None:
         with client.beta.vector_stores.with_streaming_response.delete(
             "string",
         ) as response:
@@ -216,7 +216,7 @@ class TestVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_delete(self, client: OpenAI) -> None:
+    def test_path_params_delete(self, client: NeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `vector_store_id` but received ''"):
             client.beta.vector_stores.with_raw_response.delete(
                 "",
@@ -227,12 +227,12 @@ class TestAsyncVectorStores:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_create(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create(self, async_client: AsyncNeoSpace) -> None:
         vector_store = await async_client.beta.vector_stores.create()
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_create_with_all_params(self, async_client: AsyncNeoSpace) -> None:
         vector_store = await async_client.beta.vector_stores.create(
             chunking_strategy={"type": "auto"},
             expires_after={
@@ -246,7 +246,7 @@ class TestAsyncVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_create(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.vector_stores.with_raw_response.create()
 
         assert response.is_closed is True
@@ -255,7 +255,7 @@ class TestAsyncVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.vector_stores.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -266,14 +266,14 @@ class TestAsyncVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_retrieve(self, async_client: AsyncNeoSpace) -> None:
         vector_store = await async_client.beta.vector_stores.retrieve(
             "string",
         )
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.vector_stores.with_raw_response.retrieve(
             "string",
         )
@@ -284,7 +284,7 @@ class TestAsyncVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.vector_stores.with_streaming_response.retrieve(
             "string",
         ) as response:
@@ -297,21 +297,21 @@ class TestAsyncVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncOpenAI) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncNeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `vector_store_id` but received ''"):
             await async_client.beta.vector_stores.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
-    async def test_method_update(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_update(self, async_client: AsyncNeoSpace) -> None:
         vector_store = await async_client.beta.vector_stores.update(
             "string",
         )
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncNeoSpace) -> None:
         vector_store = await async_client.beta.vector_stores.update(
             "string",
             expires_after={
@@ -324,7 +324,7 @@ class TestAsyncVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_update(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.vector_stores.with_raw_response.update(
             "string",
         )
@@ -335,7 +335,7 @@ class TestAsyncVectorStores:
         assert_matches_type(VectorStore, vector_store, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.vector_stores.with_streaming_response.update(
             "string",
         ) as response:
@@ -348,19 +348,19 @@ class TestAsyncVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncOpenAI) -> None:
+    async def test_path_params_update(self, async_client: AsyncNeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `vector_store_id` but received ''"):
             await async_client.beta.vector_stores.with_raw_response.update(
                 "",
             )
 
     @parametrize
-    async def test_method_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_list(self, async_client: AsyncNeoSpace) -> None:
         vector_store = await async_client.beta.vector_stores.list()
         assert_matches_type(AsyncCursorPage[VectorStore], vector_store, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncNeoSpace) -> None:
         vector_store = await async_client.beta.vector_stores.list(
             after="string",
             before="string",
@@ -370,7 +370,7 @@ class TestAsyncVectorStores:
         assert_matches_type(AsyncCursorPage[VectorStore], vector_store, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_list(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.vector_stores.with_raw_response.list()
 
         assert response.is_closed is True
@@ -379,7 +379,7 @@ class TestAsyncVectorStores:
         assert_matches_type(AsyncCursorPage[VectorStore], vector_store, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.vector_stores.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -390,14 +390,14 @@ class TestAsyncVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_delete(self, async_client: AsyncOpenAI) -> None:
+    async def test_method_delete(self, async_client: AsyncNeoSpace) -> None:
         vector_store = await async_client.beta.vector_stores.delete(
             "string",
         )
         assert_matches_type(VectorStoreDeleted, vector_store, path=["response"])
 
     @parametrize
-    async def test_raw_response_delete(self, async_client: AsyncOpenAI) -> None:
+    async def test_raw_response_delete(self, async_client: AsyncNeoSpace) -> None:
         response = await async_client.beta.vector_stores.with_raw_response.delete(
             "string",
         )
@@ -408,7 +408,7 @@ class TestAsyncVectorStores:
         assert_matches_type(VectorStoreDeleted, vector_store, path=["response"])
 
     @parametrize
-    async def test_streaming_response_delete(self, async_client: AsyncOpenAI) -> None:
+    async def test_streaming_response_delete(self, async_client: AsyncNeoSpace) -> None:
         async with async_client.beta.vector_stores.with_streaming_response.delete(
             "string",
         ) as response:
@@ -421,7 +421,7 @@ class TestAsyncVectorStores:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_delete(self, async_client: AsyncOpenAI) -> None:
+    async def test_path_params_delete(self, async_client: AsyncNeoSpace) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `vector_store_id` but received ''"):
             await async_client.beta.vector_stores.with_raw_response.delete(
                 "",

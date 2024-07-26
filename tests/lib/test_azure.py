@@ -5,22 +5,22 @@ import httpx
 import pytest
 from respx import MockRouter
 
-from openai._models import FinalRequestOptions
-from openai.lib.azure import AzureOpenAI, AsyncAzureOpenAI
+from neospace._models import FinalRequestOptions
+from neospace.lib.azure import AzureNeoSpace, AsyncAzureNeoSpace
 
-Client = Union[AzureOpenAI, AsyncAzureOpenAI]
+Client = Union[AzureNeoSpace, AsyncAzureNeoSpace]
 
 
-sync_client = AzureOpenAI(
+sync_client = AzureNeoSpace(
     api_version="2023-07-01",
     api_key="example API key",
-    azure_endpoint="https://example-resource.azure.openai.com",
+    azure_endpoint="https://example-resource.azure.neospace.com",
 )
 
-async_client = AsyncAzureOpenAI(
+async_client = AsyncAzureNeoSpace(
     api_version="2023-07-01",
     api_key="example API key",
-    azure_endpoint="https://example-resource.azure.openai.com",
+    azure_endpoint="https://example-resource.azure.neospace.com",
 )
 
 
@@ -39,7 +39,7 @@ def test_implicit_deployment_path(client: Client) -> None:
     )
     assert (
         req.url
-        == "https://example-resource.azure.openai.com/openai/deployments/my-deployment-model/chat/completions?api-version=2023-07-01"
+        == "https://example-resource.azure.neospace.com/neospace/deployments/my-deployment-model/chat/completions?api-version=2023-07-01"
     )
 
 
@@ -75,7 +75,7 @@ def test_client_copying_override_options(client: Client) -> None:
 @pytest.mark.respx()
 def test_client_token_provider_refresh_sync(respx_mock: MockRouter) -> None:
     respx_mock.post(
-        "https://example-resource.azure.openai.com/openai/deployments/gpt-4/chat/completions?api-version=2024-02-01"
+        "https://example-resource.azure.neospace.com/neospace/deployments/7b-r16_lora_full_constrained/chat/completions?api-version=2024-02-01"
     ).mock(
         side_effect=[
             httpx.Response(500, json={"error": "server error"}),
@@ -95,12 +95,12 @@ def test_client_token_provider_refresh_sync(respx_mock: MockRouter) -> None:
 
         return "second"
 
-    client = AzureOpenAI(
+    client = AzureNeoSpace(
         api_version="2024-02-01",
         azure_ad_token_provider=token_provider,
-        azure_endpoint="https://example-resource.azure.openai.com",
+        azure_endpoint="https://example-resource.azure.neospace.com",
     )
-    client.chat.completions.create(messages=[], model="gpt-4")
+    client.chat.completions.create(messages=[], model="7b-r16_lora_full_constrained")
 
     calls = cast("list[MockRequestCall]", respx_mock.calls)
 
@@ -114,7 +114,7 @@ def test_client_token_provider_refresh_sync(respx_mock: MockRouter) -> None:
 @pytest.mark.respx()
 async def test_client_token_provider_refresh_async(respx_mock: MockRouter) -> None:
     respx_mock.post(
-        "https://example-resource.azure.openai.com/openai/deployments/gpt-4/chat/completions?api-version=2024-02-01"
+        "https://example-resource.azure.neospace.com/neospace/deployments/7b-r16_lora_full_constrained/chat/completions?api-version=2024-02-01"
     ).mock(
         side_effect=[
             httpx.Response(500, json={"error": "server error"}),
@@ -134,13 +134,13 @@ async def test_client_token_provider_refresh_async(respx_mock: MockRouter) -> No
 
         return "second"
 
-    client = AsyncAzureOpenAI(
+    client = AsyncAzureNeoSpace(
         api_version="2024-02-01",
         azure_ad_token_provider=token_provider,
-        azure_endpoint="https://example-resource.azure.openai.com",
+        azure_endpoint="https://example-resource.azure.neospace.com",
     )
 
-    await client.chat.completions.create(messages=[], model="gpt-4")
+    await client.chat.completions.create(messages=[], model="7b-r16_lora_full_constrained")
 
     calls = cast("list[MockRequestCall]", respx_mock.calls)
 

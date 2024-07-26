@@ -6,17 +6,17 @@ import httpx
 import pytest
 import pydantic
 
-from openai import OpenAI, BaseModel
-from openai._streaming import Stream
-from openai._base_client import FinalRequestOptions
-from openai._legacy_response import LegacyAPIResponse
+from neospace import NeoSpace, BaseModel
+from neospace._streaming import Stream
+from neospace._base_client import FinalRequestOptions
+from neospace._legacy_response import LegacyAPIResponse
 
 
 class PydanticModel(pydantic.BaseModel):
     ...
 
 
-def test_response_parse_mismatched_basemodel(client: OpenAI) -> None:
+def test_response_parse_mismatched_basemodel(client: NeoSpace) -> None:
     response = LegacyAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -28,12 +28,12 @@ def test_response_parse_mismatched_basemodel(client: OpenAI) -> None:
 
     with pytest.raises(
         TypeError,
-        match="Pydantic models must subclass our base model type, e.g. `from openai import BaseModel`",
+        match="Pydantic models must subclass our base model type, e.g. `from neospace import BaseModel`",
     ):
         response.parse(to=PydanticModel)
 
 
-def test_response_parse_custom_stream(client: OpenAI) -> None:
+def test_response_parse_custom_stream(client: NeoSpace) -> None:
     response = LegacyAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -52,7 +52,7 @@ class CustomModel(BaseModel):
     bar: int
 
 
-def test_response_parse_custom_model(client: OpenAI) -> None:
+def test_response_parse_custom_model(client: NeoSpace) -> None:
     response = LegacyAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,
@@ -67,7 +67,7 @@ def test_response_parse_custom_model(client: OpenAI) -> None:
     assert obj.bar == 2
 
 
-def test_response_parse_annotated_type(client: OpenAI) -> None:
+def test_response_parse_annotated_type(client: NeoSpace) -> None:
     response = LegacyAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,

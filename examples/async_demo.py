@@ -2,15 +2,15 @@
 
 import asyncio
 
-from openai import AsyncOpenAI
+from neospace import AsyncNeoSpace
 
-# gets API Key from environment variable OPENAI_API_KEY
-client = AsyncOpenAI()
+# gets API Key from environment variable NEOSPACE_API_KEY
+client = AsyncNeoSpace()
 
 
 async def main() -> None:
     stream = await client.completions.create(
-        model="gpt-3.5-turbo-instruct",
+        model="7b-r16_lora_full_constrained-instruct",
         prompt="Say this is a test",
         stream=True,
     )

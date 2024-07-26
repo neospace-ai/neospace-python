@@ -1,5 +1,5 @@
 # workflow for re-running publishing to PyPI in case it fails for some reason
-# you can run this workflow by navigating to https://www.github.com/openai/openai-python/actions/workflows/publish-pypi.yml
+# you can run this workflow by navigating to https://www.github.com/neospace/neospace-python/actions/workflows/publish-pypi.yml
 name: Publish PyPI
 on:
   workflow_dispatch:
@@ -24,4 +24,4 @@ jobs:
         run: |
           bash ./bin/publish-pypi
         env:
-          PYPI_TOKEN: ${{ secrets.OPENAI_PYPI_TOKEN || secrets.PYPI_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.NEOSPACE_PYPI_TOKEN || secrets.PYPI_TOKEN }}

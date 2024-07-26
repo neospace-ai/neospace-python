@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-from openai import OpenAI
+from neospace import NeoSpace
 
-# gets OPENAI_API_KEY from your environment variables
-openai = OpenAI()
+# gets NEOSPACE_API_KEY from your environment variables
+neospace = NeoSpace()
 
 prompt = "An astronaut lounging in a tropical resort in space, pixel art"
 model = "dall-e-3"
@@ -11,7 +11,7 @@ model = "dall-e-3"
 
 def main() -> None:
     # Generate an image based on the prompt
-    response = openai.images.generate(prompt=prompt, model=model)
+    response = neospace.images.generate(prompt=prompt, model=model)
 
     # Prints response containing a URL link to image
     print(response)

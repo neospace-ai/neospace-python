@@ -1,14 +1,14 @@
 #!/usr/bin/env -S poetry run python
 
-from openai import OpenAI
+from neospace import NeoSpace
 
-# gets API Key from environment variable OPENAI_API_KEY
-client = OpenAI()
+# gets API Key from environment variable NEOSPACE_API_KEY
+client = NeoSpace()
 
 # Non-streaming:
 print("----- standard request -----")
 completion = client.chat.completions.create(
-    model="gpt-4",
+    model="7b-r16_lora_full_constrained",
     messages=[
         {
             "role": "user",
@@ -21,7 +21,7 @@ print(completion.choices[0].message.content)
 # Streaming:
 print("----- streaming request -----")
 stream = client.chat.completions.create(
-    model="gpt-4",
+    model="7b-r16_lora_full_constrained",
     messages=[
         {
             "role": "user",
@@ -40,7 +40,7 @@ print()
 # Response headers:
 print("----- custom response headers test -----")
 response = client.chat.completions.with_raw_response.create(
-    model="gpt-4",
+    model="7b-r16_lora_full_constrained",
     messages=[
         {
             "role": "user",
