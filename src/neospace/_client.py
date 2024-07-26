@@ -118,8 +118,10 @@ class NeoSpace(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("NEOSPACE_BASE_URL")
         if base_url is None:
-            # TOME CORTEX
-            base_url = f"https://cortex.api.dev.neospace.ai/v1/"
+            raise NeoSpaceError(
+                "The base_url client option must be set either by passing base_url to the client or by setting the NEOSPACE_BASE_URL environment variable"
+            )
+            # base_url = ""
 
         super().__init__(
             version=__version__,
