@@ -37,14 +37,14 @@ jobs:
 
     - name: Generate Random Tag
       id: random_tag
-      run: echo "::set-output name=tag::v1.0.0-$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8)"
+      run: echo "tag=v1.0.0-$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8)" >> $GITHUB_OUTPUT
 
     - name: Create Release
       uses: ncipollo/release-action@v1.14.0
       with:
         artifacts: "dist/*"
         artifactContentType: "application/zip"
-        name: "Release main"
+        name: "Release main ${{ steps.random_tag.outputs.tag }}"
         prerelease: "true"
         tag: ${{ steps.random_tag.outputs.tag }}
               
