@@ -3,13 +3,13 @@
 
 name: Python package
 
-on:
+on:  
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
-  build_release:
+  release:
 
     runs-on: ubuntu-latest
 
