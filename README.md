@@ -14,12 +14,10 @@ The REST API documentation can be found on [platform.neospace.com](https://platf
 
 ## Installation
 
-> [!IMPORTANT]
-> The SDK was rewritten in v1, which was released November 6th 2023. See the [v1 migration guide](https://github.com/neospace/neospace-python/discussions/742), which includes scripts to automatically update your code.
 
 ```sh
-# install from PyPI
-pip install neospace
+# install from Release
+pip install https://github.com/neospace-ai/neospace-python/releases/download/v1.0.0-MTuBbe5M/neospace-1.37.0-py3-none-any.whl
 ```
 
 ## Usage
@@ -33,6 +31,7 @@ from neospace import NeoSpace
 client = NeoSpace(
     # This is the default and can be omitted
     api_key=os.environ.get("NEOSPACE_API_KEY"),
+    base_url=os.environ.get("NEOSPACE_BASE_URL")
 )
 
 chat_completion = client.chat.completions.create(
@@ -46,10 +45,13 @@ chat_completion = client.chat.completions.create(
 )
 ```
 
-While you can provide an `api_key` keyword argument,
+While you can provide a `api_key` and `base_url`  keyword arguments,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `NEOSPACE_API_KEY="My API Key"` to your `.env` file
+to add `NEOSPACE_API_KEY="My API Key"` `NEOSPACE_BASE_URL="My Inference Endpoint"` to your `.env` file
 so that your API Key is not stored in source control.
+
+> [!IMPORTANT]
+> The SDK was forked from [openai-python](https://github.com/openai/openai-python) just to to permit completions in neospace llm's, so the SDK can have some integration errors in the examples below (open issue to solve it).
 
 ### Polling Helpers
 
