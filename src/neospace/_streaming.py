@@ -13,8 +13,7 @@ from ._utils import is_mapping, extract_type_var_from_base
 from ._exceptions import APIError
 
 if TYPE_CHECKING:
-    from ._client import NeoSpace, AsyncNeoSpace
-
+    from ._client import NeoSpace
 
 _T = TypeVar("_T")
 
@@ -61,6 +60,7 @@ class Stream(Generic[_T]):
 
             if sse.event is None:
                 data = sse.json()
+
                 if is_mapping(data) and data.get("error"):
                     message = None
                     error = data.get("error")
@@ -74,7 +74,7 @@ class Stream(Generic[_T]):
                         request=self.response.request,
                         body=data["error"],
                     )
-
+                
                 yield process_data(data=data, cast_to=cast_to, response=response)
 
             else:
@@ -93,8 +93,8 @@ class Stream(Generic[_T]):
                         request=self.response.request,
                         body=data["error"],
                     )
-
-                yield process_data(data={"data": data, "event": sse.event}, cast_to=cast_to, response=response)
+                # yield process_data(data={"data": data, "event": sse.event}, cast_to=cast_to, response=response)
+                yield process_data(data=data, cast_to=cast_to, response=response)
 
         # Ensure the entire stream is consumed
         for _sse in iterator:
@@ -118,109 +118,6 @@ class Stream(Generic[_T]):
         Automatically called if the response body is read to completion.
         """
         self.response.close()
-
-
-class AsyncStream(Generic[_T]):
-    """Provides the core interface to iterate over an asynchronous stream response."""
-
-    response: httpx.Response
-
-    _decoder: SSEDecoder | SSEBytesDecoder
-
-    def __init__(
-        self,
-        *,
-        cast_to: type[_T],
-        response: httpx.Response,
-        client: AsyncNeoSpace,
-    ) -> None:
-        self.response = response
-        self._cast_to = cast_to
-        self._client = client
-        self._decoder = client._make_sse_decoder()
-        self._iterator = self.__stream__()
-
-    async def __anext__(self) -> _T:
-        return await self._iterator.__anext__()
-
-    async def __aiter__(self) -> AsyncIterator[_T]:
-        async for item in self._iterator:
-            yield item
-
-    async def _iter_events(self) -> AsyncIterator[ServerSentEvent]:
-        async for sse in self._decoder.aiter_bytes(self.response.aiter_bytes()):
-            yield sse
-
-    async def __stream__(self) -> AsyncIterator[_T]:
-        cast_to = cast(Any, self._cast_to)
-        response = self.response
-        process_data = self._client._process_response_data
-        iterator = self._iter_events()
-
-        async for sse in iterator:
-            if sse.data.startswith("[DONE]"):
-                break
-
-            if sse.event is None:
-                data = sse.json()
-                if is_mapping(data) and data.get("error"):
-                    message = None
-                    error = data.get("error")
-                    if is_mapping(error):
-                        message = error.get("message")
-                    if not message or not isinstance(message, str):
-                        message = "An error occurred during streaming"
-
-                    raise APIError(
-                        message=message,
-                        request=self.response.request,
-                        body=data["error"],
-                    )
-
-                yield process_data(data=data, cast_to=cast_to, response=response)
-
-            else:
-                data = sse.json()
-
-                if sse.event == "error" and is_mapping(data) and data.get("error"):
-                    message = None
-                    error = data.get("error")
-                    if is_mapping(error):
-                        message = error.get("message")
-                    if not message or not isinstance(message, str):
-                        message = "An error occurred during streaming"
-
-                    raise APIError(
-                        message=message,
-                        request=self.response.request,
-                        body=data["error"],
-                    )
-
-                yield process_data(data={"data": data, "event": sse.event}, cast_to=cast_to, response=response)
-
-        # Ensure the entire stream is consumed
-        async for _sse in iterator:
-            ...
-
-    async def __aenter__(self) -> Self:
-        return self
-
-    async def __aexit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc: BaseException | None,
-        exc_tb: TracebackType | None,
-    ) -> None:
-        await self.close()
-
-    async def close(self) -> None:
-        """
-        Close the response and release the connection.
-
-        Automatically called if the response body is read to completion.
-        """
-        await self.response.aclose()
-
 
 class ServerSentEvent:
     def __init__(
@@ -379,10 +276,10 @@ class SSEBytesDecoder(Protocol):
         ...
 
 
-def is_stream_class_type(typ: type) -> TypeGuard[type[Stream[object]] | type[AsyncStream[object]]]:
+def is_stream_class_type(typ: type) -> TypeGuard[type[Stream[object]]]:
     """TypeGuard for determining whether or not the given type is a subclass of `Stream` / `AsyncStream`"""
     origin = get_origin(typ) or typ
-    return inspect.isclass(origin) and issubclass(origin, (Stream, AsyncStream))
+    return inspect.isclass(origin) and issubclass(origin, (Stream,))
 
 
 def extract_stream_chunk_type(
@@ -400,11 +297,11 @@ def extract_stream_chunk_type(
     extract_stream_chunk_type(MyStream) -> bytes
     ```
     """
-    from ._base_client import Stream, AsyncStream
+    from ._base_client import Stream
 
     return extract_type_var_from_base(
         stream_cls,
         index=0,
-        generic_bases=cast("tuple[type, ...]", (Stream, AsyncStream)),
+        generic_bases=cast("tuple[type, ...]", (Stream,)),
         failure_message=failure_message,
     )

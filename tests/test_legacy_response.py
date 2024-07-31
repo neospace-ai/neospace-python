@@ -12,8 +12,7 @@ from neospace._base_client import FinalRequestOptions
 from neospace._legacy_response import LegacyAPIResponse
 
 
-class PydanticModel(pydantic.BaseModel):
-    ...
+class PydanticModel(pydantic.BaseModel): ...
 
 
 def test_response_parse_mismatched_basemodel(client: NeoSpace) -> None:
