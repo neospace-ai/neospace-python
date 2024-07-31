@@ -350,7 +350,7 @@ class Threads(SyncAPIResource):
           response_format: Specifies the format that the model must output. Compatible with
               [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
               [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
-              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
+              and all NEO-NeoSpace models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.
@@ -507,7 +507,7 @@ class Threads(SyncAPIResource):
           response_format: Specifies the format that the model must output. Compatible with
               [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
               [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
-              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
+              and all NEO-NeoSpace models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.
@@ -660,7 +660,7 @@ class Threads(SyncAPIResource):
           response_format: Specifies the format that the model must output. Compatible with
               [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
               [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
-              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
+              and all NEO-NeoSpace models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.
@@ -1382,7 +1382,7 @@ class AsyncThreads(AsyncAPIResource):
           response_format: Specifies the format that the model must output. Compatible with
               [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
               [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
-              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
+              and all NEO-NeoSpace models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.
@@ -1539,7 +1539,7 @@ class AsyncThreads(AsyncAPIResource):
           response_format: Specifies the format that the model must output. Compatible with
               [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
               [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
-              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
+              and all NEO-NeoSpace models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.
@@ -1692,7 +1692,7 @@ class AsyncThreads(AsyncAPIResource):
           response_format: Specifies the format that the model must output. Compatible with
               [7b-r16_lora_full_constrainedo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrainedo),
               [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-turbo-and-7b-r16_lora_full_constrained),
-              and all NEO-3.5 Turbo models since `7b-r16_lora_full_constrained-1106`.
+              and all NEO-NeoSpace models since `7b-r16_lora_full_constrained-1106`.
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
               message the model generates is valid JSON.

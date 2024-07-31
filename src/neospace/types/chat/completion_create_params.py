@@ -123,7 +123,7 @@ class CompletionCreateParamsBase(TypedDict, total=False):
 
     Compatible with
     [7b-r16_lora_full_constrained Turbo](https://platform.neospace.com/docs/models/7b-r16_lora_full_constrained-and-7b-r16_lora_full_constrained-turbo) and
-    all NEO-3.5 Turbo models newer than `7b-r16_lora_full_constrained-1106`.
+    all NEO-NeoSpace models newer than `7b-r16_lora_full_constrained-1106`.
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
     message the model generates is valid JSON.
