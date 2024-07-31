@@ -14,11 +14,14 @@ from ._client import (
     Timeout,
     NeoSpace,
     Transport,
+    AsyncClient,
+    AsyncStream,
+    AsyncNeoSpace,
     RequestOptions,
 )
 from ._models import BaseModel
 from ._version import __title__, __version__
-from ._response import APIResponse as APIResponse
+from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
@@ -65,8 +68,11 @@ __all__ = [
     "Timeout",
     "RequestOptions",
     "Client",
+    "AsyncClient",
     "Stream",
+    "AsyncStream",
     "NeoSpace",
+    "AsyncNeoSpace",
     "file_from_path",
     "BaseModel",
     "DEFAULT_TIMEOUT",
@@ -76,8 +82,14 @@ __all__ = [
     "DefaultAsyncHttpxClient",
 ]
 
+from .lib import azure as _azure
 from .version import VERSION as VERSION
+from .lib.azure import AzureNeoSpace as AzureNeoSpace, AsyncAzureNeoSpace as AsyncAzureNeoSpace
 from .lib._old_api import *
+from .lib.streaming import (
+    AssistantEventHandler as AssistantEventHandler,
+    AsyncAssistantEventHandler as AsyncAssistantEventHandler,
+)
 
 _setup_logging()
 
@@ -129,6 +141,8 @@ api_version: str | None = _os.environ.get("NEOSPACE_API_VERSION")
 azure_endpoint: str | None = _os.environ.get("AZURE_NEOSPACE_ENDPOINT")
 
 azure_ad_token: str | None = _os.environ.get("AZURE_NEOSPACE_AD_TOKEN")
+
+azure_ad_token_provider: _azure.AzureADTokenProvider | None = None
 
 
 class _ModuleClient(NeoSpace):
@@ -236,6 +250,33 @@ class _ModuleClient(NeoSpace):
         http_client = value
 
 
+class _AzureModuleClient(_ModuleClient, AzureNeoSpace):  # type: ignore
+    ...
+
+
+class _AmbiguousModuleClientUsageError(NeoSpaceError):
+    def __init__(self) -> None:
+        super().__init__(
+            "Ambiguous use of module client; please set `neospace.api_type` or the `NEOSPACE_API_TYPE` environment variable to `neospace` or `azure`"
+        )
+
+
+def _has_neospace_credentials() -> bool:
+    return _os.environ.get("NEOSPACE_API_KEY") is not None
+
+
+def _has_azure_credentials() -> bool:
+    return azure_endpoint is not None or _os.environ.get("AZURE_NEOSPACE_API_KEY") is not None
+
+
+def _has_azure_ad_credentials() -> bool:
+    return (
+        _os.environ.get("AZURE_NEOSPACE_AD_TOKEN") is not None
+        or azure_ad_token is not None
+        or azure_ad_token_provider is not None
+    )
+
+
 _client: NeoSpace | None = None
 
 
@@ -243,12 +284,51 @@ def _load_client() -> NeoSpace:  # type: ignore[reportUnusedFunction]
     global _client
 
     if _client is None:
-        global api_type, api_version
+        global api_type, azure_endpoint, azure_ad_token, api_version
+
+        if azure_endpoint is None:
+            azure_endpoint = _os.environ.get("AZURE_NEOSPACE_ENDPOINT")
+
+        if azure_ad_token is None:
+            azure_ad_token = _os.environ.get("AZURE_NEOSPACE_AD_TOKEN")
 
         if api_version is None:
             api_version = _os.environ.get("NEOSPACE_API_VERSION")
 
-        api_type = "neospace"
+        if api_type is None:
+            has_neospace = _has_neospace_credentials()
+            has_azure = _has_azure_credentials()
+            has_azure_ad = _has_azure_ad_credentials()
+
+            if has_neospace and (has_azure or has_azure_ad):
+                raise _AmbiguousModuleClientUsageError()
+
+            if (azure_ad_token is not None or azure_ad_token_provider is not None) and _os.environ.get(
+                "AZURE_NEOSPACE_API_KEY"
+            ) is not None:
+                raise _AmbiguousModuleClientUsageError()
+
+            if has_azure or has_azure_ad:
+                api_type = "azure"
+            else:
+                api_type = "neospace"
+
+        if api_type == "azure":
+            _client = _AzureModuleClient(  # type: ignore
+                api_version=api_version,
+                azure_endpoint=azure_endpoint,
+                api_key=api_key,
+                azure_ad_token=azure_ad_token,
+                azure_ad_token_provider=azure_ad_token_provider,
+                organization=organization,
+                base_url=base_url,
+                timeout=timeout,
+                max_retries=max_retries,
+                default_headers=default_headers,
+                default_query=default_query,
+                http_client=http_client,
+            )
+            return _client
 
         _client = _ModuleClient(
             api_key=api_key,
@@ -273,7 +353,15 @@ def _reset_client() -> None:  # type: ignore[reportUnusedFunction]
 
 
 from ._module_client import (
+    beta as beta,
     chat as chat,
+    audio as audio,
+    files as files,
+    images as images,
     models as models,
+    batches as batches,
+    embeddings as embeddings,
     completions as completions,
+    fine_tuning as fine_tuning,
+    moderations as moderations,
 )

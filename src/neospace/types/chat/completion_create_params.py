@@ -257,7 +257,7 @@ class ResponseFormat(TypedDict, total=False):
 
 class CompletionCreateParamsNonStreaming(CompletionCreateParamsBase):
     stream: Optional[Literal[False]]
-    """If set, partial message deltas will be sent, like in ChatNeoSpace.
+    """If set, partial message deltas will be sent, like in ChatNEO.
 
     Tokens will be sent as data-only
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
@@ -269,7 +269,7 @@ class CompletionCreateParamsNonStreaming(CompletionCreateParamsBase):
 
 class CompletionCreateParamsStreaming(CompletionCreateParamsBase):
     stream: Required[Literal[True]]
-    """If set, partial message deltas will be sent, like in ChatNeoSpace.
+    """If set, partial message deltas will be sent, like in ChatNEO.
 
     Tokens will be sent as data-only
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)

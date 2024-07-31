@@ -508,7 +508,7 @@ def construct_type(*, value: object, type_: object) -> object:
             return parse_date(value)  # type: ignore
         except Exception:
             return value
-        
+
     return value
 
 

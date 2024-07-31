@@ -16,7 +16,7 @@ from ._types import NoneType
 from ._utils import is_given, extract_type_arg, is_annotated_type
 from ._models import BaseModel, is_basemodel
 from ._constants import RAW_RESPONSE_HEADER
-from ._streaming import Stream, is_stream_class_type, extract_stream_chunk_type
+from ._streaming import Stream, AsyncStream, is_stream_class_type, extract_stream_chunk_type
 from ._exceptions import APIResponseValidationError
 
 if TYPE_CHECKING:
@@ -48,7 +48,7 @@ class LegacyAPIResponse(Generic[R]):
     _client: BaseClient[Any, Any]
     _parsed_by_type: dict[type[Any], Any]
     _stream: bool
-    _stream_cls: type[Stream[Any]] | None
+    _stream_cls: type[Stream[Any]] | type[AsyncStream[Any]] | None
     _options: FinalRequestOptions
 
     http_response: httpx.Response
@@ -60,7 +60,7 @@ class LegacyAPIResponse(Generic[R]):
         cast_to: type[R],
         client: BaseClient[Any, Any],
         stream: bool,
-        stream_cls: type[Stream[Any]] | None,
+        stream_cls: type[Stream[Any]] | type[AsyncStream[Any]] | None,
         options: FinalRequestOptions,
     ) -> None:
         self._cast_to = cast_to
@@ -76,10 +76,12 @@ class LegacyAPIResponse(Generic[R]):
         return self.http_response.headers.get("x-request-id")  # type: ignore[no-any-return]
 
     @overload
-    def parse(self, *, to: type[_T]) -> _T: ...
+    def parse(self, *, to: type[_T]) -> _T:
+        ...
 
     @overload
-    def parse(self) -> R: ...
+    def parse(self) -> R:
+        ...
 
     def parse(self, *, to: type[_T] | None = None) -> R | _T:
         """Returns the rich python representation of this response's data.
@@ -183,7 +185,7 @@ class LegacyAPIResponse(Generic[R]):
         if self._stream:
             if to:
                 if not is_stream_class_type(to):
-                    raise TypeError(f"Expected custom parse type to be a subclass of {Stream}")
+                    raise TypeError(f"Expected custom parse type to be a subclass of {Stream} or {AsyncStream}")
 
                 return cast(
                     _T,
@@ -207,7 +209,7 @@ class LegacyAPIResponse(Generic[R]):
                     ),
                 )
 
-            stream_cls = cast("type[Stream[Any]] | None", self._client._default_stream_cls)
+            stream_cls = cast("type[Stream[Any]] | type[AsyncStream[Any]] | None", self._client._default_stream_cls)
             if stream_cls is None:
                 raise MissingStreamClassError()
 
