@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Optional, Required, TypedDict
+
+from neospace.types.chat.chat_completion_tool_error_param import ChatCompletionToolError
 
 __all__ = ["ChatCompletionToolMessageParam"]
 
@@ -17,9 +19,7 @@ class ChatCompletionToolMessageParam(TypedDict, total=False):
     tool_call_id: Required[str]
     """Tool call that this message is responding to."""
 
-    status: Literal["SUCCESS", "SERVER_ERROR", "CLIENT_ERROR"]
+    tool_error: Optional[ChatCompletionToolError]
     """
-    The status of the tool message. `SUCCESS` if the tool message was successful (200), 
-    `SERVER_ERROR` if the tool message was unsuccessful due to a server error (500), 
-    or `CLIENT_ERROR` if the tool message was unsuccessful due to a client error (400).
+    Error object if the message is an error message. If this is present, the message should be treated as an error message.
     """
