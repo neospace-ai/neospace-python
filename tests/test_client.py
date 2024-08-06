@@ -327,7 +327,7 @@ class TestNeoSpace:
     def test_validate_headers(self) -> None:
         client = NeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("Authorization") == f"Bearer {api_key}"
+        assert request.headers.get("x-neo-api-key") == f"Bearer {api_key}"
 
         with pytest.raises(NeoSpaceError):
             client2 = NeoSpace(base_url=base_url, api_key=None, _strict_response_validation=True)
@@ -1043,7 +1043,7 @@ class TestAsyncNeoSpace:
     def test_validate_headers(self) -> None:
         client = AsyncNeoSpace(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("Authorization") == f"Bearer {api_key}"
+        assert request.headers.get("x-neo-api-key") == f"Bearer {api_key}"
 
         with pytest.raises(NeoSpaceError):
             client2 = AsyncNeoSpace(base_url=base_url, api_key=None, _strict_response_validation=True)
