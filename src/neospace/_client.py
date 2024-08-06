@@ -158,7 +158,7 @@ class NeoSpace(SyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        return {"x-neo-api-key": f"Bearer {api_key}"}
+        return {"x-neo-api-key": api_key}
 
     @property
     @override
@@ -372,7 +372,7 @@ class AsyncNeoSpace(AsyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        return {"x-neo-api-key": f"Bearer {api_key}"}
+        return {"x-neo-api-key": f"{api_key}"}
 
     @property
     @override

@@ -291,7 +291,7 @@ class AzureNeoSpace(BaseAzureClient[httpx.Client, Stream[Any]], NeoSpace):
         azure_ad_token = self._get_azure_ad_token()
         if azure_ad_token is not None:
             if headers.get("x-neo-api-key") is None:
-                headers["x-neo-api-key"] = f"Bearer {azure_ad_token}"
+                headers["x-neo-api-key"] = azure_ad_token
         elif self.api_key is not API_KEY_SENTINEL:
             if headers.get("api-key") is None:
                 headers["api-key"] = self.api_key
@@ -536,7 +536,7 @@ class AsyncAzureNeoSpace(BaseAzureClient[httpx.AsyncClient, AsyncStream[Any]], A
         azure_ad_token = await self._get_azure_ad_token()
         if azure_ad_token is not None:
             if headers.get("x-neo-api-key") is None:
-                headers["x-neo-api-key"] = f"Bearer {azure_ad_token}"
+                headers["x-neo-api-key"] = azure_ad_token
         elif self.api_key is not API_KEY_SENTINEL:
             if headers.get("api-key") is None:
                 headers["api-key"] = self.api_key

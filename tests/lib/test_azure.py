@@ -106,8 +106,8 @@ def test_client_token_provider_refresh_sync(respx_mock: MockRouter) -> None:
 
     assert len(calls) == 2
 
-    assert calls[0].request.headers.get("x-neo-api-key") == "Bearer first"
-    assert calls[1].request.headers.get("x-neo-api-key") == "Bearer second"
+    assert calls[0].request.headers.get("x-neo-api-key") == "first"
+    assert calls[1].request.headers.get("x-neo-api-key") == "second"
 
 
 @pytest.mark.asyncio
@@ -146,5 +146,5 @@ async def test_client_token_provider_refresh_async(respx_mock: MockRouter) -> No
 
     assert len(calls) == 2
 
-    assert calls[0].request.headers.get("x-neo-api-key") == "Bearer first"
-    assert calls[1].request.headers.get("x-neo-api-key") == "Bearer second"
+    assert calls[0].request.headers.get("x-neo-api-key") == "first"
+    assert calls[1].request.headers.get("x-neo-api-key") == "second"
